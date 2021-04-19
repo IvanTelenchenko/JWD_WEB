@@ -19,7 +19,6 @@ public class ConstantPage {
 	public static final String SUCCESSCHANGE = "/WEB-INF/jsp/SuccessChange.jsp";
 	public static final String VERIFICATIONPAGE = "/WEB-INF/jsp/VerificationPage.jsp";
 	
-	
 //	public static final String GOTOERROR404 = "Controller?command=error404";
 	public static final String GOTOERROR500 = "Controller?command=error500";
 	public static final String GOTOMAINPAGE = "Controller?command=mainpage";
