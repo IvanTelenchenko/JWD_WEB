@@ -1,0 +1,416 @@
+ .reg { /* Правая колонка */
+    margin: 20px auto; /* Значения отступов */
+    padding: 0 20px;
+    border: 1px solid #333;
+    border-radius : 20px;
+    width:50%;
+    text-align: center; 
+    background: #e6e3e6; 
+    box-shadow: 0 5px 10px rgb(58, 58, 58);
+  }
+
+
+.name {
+	margin: 30px auto;
+}
+
+.error-message {
+	margin: 10px auto;
+	color: red;
+	font: bold 15px/1.5 Arial, sans-serif;
+}
+
+.message {
+	margin: 10px auto;
+	color: green;
+	font: bold 15px/1.5 Arial, sans-serif;
+}
+
+input[type="text"], input[type="password"], input[type="date"] {
+	display: block;
+	margin: 5px 5px;
+	width: 300px;
+	height: 40px;
+	border: none;
+	border-radius: 5px;
+	padding: 0px;
+	display: inline-block;
+} 
+
+/* .butDate {
+	width: 100px;
+	height: 40px;
+	margin: 5px 5px;
+	font-size: 15px;
+	color: rgb(0, 0, 0);
+	background-color: rgb(157, 157, 157);
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: 0.3s;
+	display: inline-block;
+} buttonCh  */ 
+
+/* .butDate:hover {
+	color: red;
+	background-color: yellow;
+} */
+
+.fields {
+	margin-top: 20px;
+}
+
+.mytitle {
+	text-align: center;
+	font-size: 15x;
+	margin: 0px auto;
+}
+
+.link_signin {
+	font: italic 15px/1.5 Arial, sans-serif;
+}
+
+.foot {
+	margin: 20px auto;
+	text-align: center;
+}
+
+/* .container {
+	width: 500px; Ширина слоя
+	margin: 0 auto; Выравнивание по центру
+	background: #f0f0f0; Цвет фона левой колонки
+	
+} */
+
+/* .sidebar {
+	margin-top: 10px;
+	width: 110px; Ширина слоя
+	padding: 0 10px; Отступы вокруг текста
+	float: left; Обтекание по правому краю
+} */
+
+ .sidebar { /* Левая колонка */
+    float: left; /* Обтекание справа */
+    border: 1px solid #333; /* Параметры рамки вокруг */
+    width: 20%; /* Ширина колонки */
+    padding: 5px; /* Поля вокруг текста */
+    margin: 0px 10px 20px 5px; /* Значения отступов */
+   	border-radius: 15px;
+	background: white;
+	box-shadow: 0 5px 10px rgb(58, 58, 58);
+   }
+   
+   ol{
+   padding: 0;
+   margin: 0 auto;
+   width: 70%;
+   text-align: left;
+   }
+   
+   .form-sidebar{
+   text-align: center;
+   }
+   
+   .title-filter{
+   text-align: center;
+   }
+   
+   
+  /*  .butFilter {
+	width: 100px;
+	height: 40px;
+	margin:0 auto;
+	font-size: 15px;
+	color: rgb(0, 0, 0);
+	background-color: rgb(157, 157, 157);
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: 0.3s;
+	display: block;
+	text-align: center;
+}
+
+.butFilter:hover {
+	color: red;
+	background-color: yellow;
+} buttonCh */
+
+
+
+/* .content {
+	margin-left: 130px; Отступ слева
+	padding: 10px; Поля вокруг текста
+	background: #c0c0c0; Цвет фона правой колонки
+} */
+
+  .content { /* Правая колонка */
+    margin:  auto; /* Значения отступов */
+    padding: 0 20px;
+    border: 1px solid #333;
+    border-radius : 20px;
+    width:50%;
+    min-height: 100px;
+    text-align: center; 
+    background: #e6e3e6; 
+  }
+     
+     .content-inner { /* Правая колонка */
+    margin: 0; /* Значения отступов */
+    padding: 5px; /* Поля вокруг текста */
+    border: 1px solid #333; /* Параметры рамки */
+    width:700px;
+    text-align: center;
+   }
+
+/* Style card*/
+.card {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	width: 250px;
+	margin: 10px;
+	text-align: center;
+	font-family: arial;
+	display: inline-block;
+	border-radius: 15px;
+	background: white;
+	box-shadow: 0 5px 10px rgb(58, 58, 58);
+	padding: 10px;
+}
+
+.price {
+	color: grey;
+	font-size: 22px;
+}
+
+.button {
+	border: none;
+	outline: 0;
+	padding: 12px 0px;
+	color: white;
+	background-color: #000;
+	text-align: center;
+	cursor: pointer;
+	width: 100%;
+	font-size: 18px;
+	border-radius: 10px;
+}
+
+.button:hover{
+	opacity: 0.7;
+	background-color: #808080;
+}
+
+.button-change {
+	border: none;
+	outline: 0;
+	padding: 12px 0px;
+	color: white;
+	background-color: #000;
+	text-align: center;
+	cursor: pointer;
+	width: 100%;
+	font-size: 15px;
+	border-radius: 10px;
+}
+
+.button-change:hover{
+	opacity: 0.7;
+	background-color: #808080;
+}
+
+.butAcceptOrder{
+	border: none;
+	outline: 0;
+	padding: 5px 12px;
+	color: black;
+	background-color: #00ff00;
+	text-align: center;
+	cursor: pointer;
+	width: 50%;
+	font-size: 10px;
+	border-radius: 5px;
+	
+}
+
+.butAcceptOrder:hover{
+	opacity: 0.7;
+	background-color: #008000;
+}
+
+.butCancelOrder{
+	border: none;
+	outline: 0;
+	padding: 5px 12px;
+	color: black;
+	background-color: #ff0000;
+	text-align: center;
+	cursor: pointer;
+	width: 50%;
+	font-size: 10px;
+	border-radius: 5px;
+	
+}
+
+.butCancelOrder:hover{
+	opacity: 0.7;
+	background-color: #ad0101;
+}
+
+
+/* .card button:hover {
+	opacity: 0.7;
+	
+} */
+
+.filter{
+	display: block;
+}
+
+.img1{
+	width: 230px;
+	height: 129px;
+	/* padding: 10px; */
+	margin: 0 auto;
+}
+
+.change-buttons{
+	width: 30%;
+    margin: 20px auto;
+}
+
+.change-input{
+	width: 60%;
+    margin: 20px auto;
+}
+
+.info{
+	display: inline-block;
+    margin: 0 30px;
+    width: 80%;
+}
+
+
+.buttonCh, .butDate, .butFilter, .buttonAddCar {
+	border: none;
+	outline: 0;
+	padding: 12px 12px;
+	margin: 12px auto;
+	color: white;
+	background-color: #000;
+	text-align: center;
+	cursor: pointer;
+	width: 30%;
+	font-size: 18px;
+	border-radius: 10px;
+}
+
+.butFilter{
+	width: 50%;
+}
+
+.buttonCh:hover{
+	opacity: 0.7;
+	background-color: #808080;
+}
+
+.buttonAddCar:hover{
+	opacity: 0.7;
+	background-color: #808080;
+}
+
+.butFilter:hover{
+	opacity: 0.7;
+	background-color: #808080;
+}
+
+.butDate:hover{
+	opacity: 0.7;
+	background-color: #808080;
+}
+
+.form{
+	margin: 5px auto;
+}
+
+/* .table-pd{
+	width: 80%;
+	
+} */
+.column-left{
+	width: 40%;
+	display: inline-block;
+}
+.column-right{
+	width: 40%;
+	display: inline-block;
+}
+
+.input-date{
+	width: 40%;
+	display: inline-block;
+}
+
+.carName{
+	min-height: 45px;
+    max-height: 45px;
+}
+
+
+.table{
+	width: 100%;
+	box-shadow: 0 0px 5px rgb(58, 58, 58);
+	border-collapse: collapse;
+	margin: 10px auto;
+}
+
+.table th, .table td{
+	text-align: center;
+	padding: 10px;
+}
+
+.table th{
+	background-color: #1e88e5;
+	color: #fff;
+}
+
+.table th:nth-child(odd){
+	background: #2196f3;
+}
+
+.table tr:nth-child(even){
+	background: #f5f5f5;
+}
+
+.table tr{
+	transition: all .3s;
+}
+
+.table tr:hover{
+	background-color: #ccc;
+}
+
+.table-responsive{
+	overflow-x: auto;
+	box-shadow: 0 0px 5px rgb(58, 58, 58);
+}
+
+.successmessage{
+	margin: 10px;
+	text-align: center;
+	font-size: 20px;
+}
+
+/* .headcol {
+  position: absolute;
+  width: 5em;
+  right: 0;
+  top: auto;
+  border-top-width: 1px;
+  only relevant for first row
+  margin-top: -1px;
+  compensate for top border
+}
+
+.headcol:before {
+  content: 'Row ';
+} */

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  	<filter>
+    	<filter-name>EncodingFilter</filter-name>
+    	<filter-class>
+            by.epam.web.filter.EncodingFilter
+        </filter-class>
+  	</filter>
+  	<filter-mapping>
+    	<filter-name>EncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+  	</filter-mapping>
+  
+  
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/jsp/404.jsp</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/jsp/500.jsp</location>
+	</error-page>
+  
+	<context-param>
+    <param-name>image.directory</param-name>
+    <param-value>c:\Users\vanes\git\JWD_WEB\my_test_project\WebContent\img\</param-value>
+  </context-param>
+  
+	<jsp-config>
+		<taglib>
+			<taglib-uri>table-tag.tld</taglib-uri>
+			<taglib-location>/WEB-INF/table-tag.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>brand-name-tag.tld</taglib-uri>
+			<taglib-location>/WEB-INF/brand-name-tag.tld</taglib-location>
+		</taglib>
+		
+	</jsp-config>
+	
+  </web-app>

@@ -1,0 +1,75 @@
+
+.reg {
+	width: 320px;
+	height: 300px;
+	margin: 50px auto;
+	background-color: rgba(57, 138, 40, 0.844);
+	box-shadow: 0 5px 10px rgb(58, 58, 58);
+	text-align: center;
+	padding: 20px;
+	border-radius: 10px;
+	position: relative;
+}
+
+.name {
+	margin: 30px auto;
+}
+
+.error-message {
+	margin: 10px auto;
+	color: red;
+	font: bold 15px/1.5 Arial, sans-serif;
+}
+
+.form {
+	width: 320px;
+	position: absolute;
+	bottom: 0px;
+}
+
+input[type="text"], input[type="password"] {
+	display: block;
+	margin: 5px auto;
+	width: 320px;
+	height: 40px;
+	border: none;
+	border-radius: 5px;
+	padding: 0px;
+}
+
+.mybut {
+	width: 100px;
+	height: 40px;
+	margin: 40px auto 10px;
+	font-size: 15px;
+	color: rgb(0, 0, 0);
+	background-color: rgb(157, 157, 157);
+	border: 0px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.mybut:hover {
+	color: red;
+	background-color: yellow;
+}
+
+.fields {
+	margin-top: 20px;
+}
+
+.mytitle {
+	text-align: center;
+	font-size: 15x;
+	margin: 0px auto;
+}
+
+.link_signin {
+	font: italic 15px/1.5 Arial, sans-serif;
+}
+
+.foot {
+	margin: 20px auto;
+	text-align: center;
+}

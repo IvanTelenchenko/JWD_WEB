@@ -1,0 +1,104 @@
+
+.reg {
+	 margin: 0 auto; /* Значения отступов */
+    padding: 0 20px;
+    border: 1px solid #333;
+    border-radius : 20px;
+    width:40%;
+    min-height: 200px;
+    text-align: center; 
+    background: #e6e3e6; 
+    box-shadow: 0 5px 10px rgb(58, 58, 58);
+
+}
+
+.name {
+	margin: 30px auto;
+}
+
+.error-message {
+	margin: 10px auto;
+	color: red;
+	font: bold 15px/1.5 Arial, sans-serif;
+}
+
+.form {
+/* 	width: 80%; */
+	/* position: absolute; */
+	bottom: 0px;
+	margin: 10px auto;
+}
+
+input[type="text"], input[type="password"] {
+	display: block;
+	margin: 5px auto;
+	width: 320px;
+	height: 40px;
+	border: none;
+	border-radius: 5px;
+	padding: 0px;
+}
+
+/* .mybut {
+	width: 100px;
+	height: 40px;
+	margin: 40px auto 10px;
+	font-size: 15px;
+	color: rgb(0, 0, 0);
+	background-color: rgb(157, 157, 157);
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.mybut:hover {
+	color: red;
+	background-color: yellow;
+} */
+
+.mybut {
+	border: none;
+	outline: 0;
+	padding: 12px 0px;
+	color: white;
+	background-color: #000;
+	text-align: center;
+	cursor: pointer;
+	width: 30%;
+	font-size: 18px;
+	border-radius: 10px;
+	margin: 10px auto;
+	
+}
+
+.mybut:hover{
+	opacity: 0.7;
+	background-color: #808080;
+}
+
+.fields {
+	margin-top: 20px;
+}
+
+.mytitle {
+	text-align: center;
+	font-size: 15x;
+	margin: 0px auto;
+}
+
+.link_signin {
+	font: italic 15px/1.5 Arial, sans-serif;
+}
+
+.foot {
+	margin: 20px auto;
+	text-align: center;
+}
+
+.validMessage{
+	width : 100%;
+	font-size: 15px;
+	color : red;
+	margin: 0 auto;
+}

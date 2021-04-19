@@ -1,0 +1,211 @@
+.reg {
+	width: 740px;
+	height: 200px;
+	margin: 50px auto;
+	background-color: rgba(57, 138, 40, 0.844);
+	box-shadow: 0 5px 10px rgb(58, 58, 58);
+	padding: 20px;
+	border-radius: 10px;
+	position: relative;
+}
+
+.name {
+	margin: 30px auto;
+}
+
+.error-message {
+	margin: 10px auto;
+	color: red;
+	font: bold 15px/1.5 Arial, sans-serif;
+}
+
+input[type="text"], input[type="password"], input[type="date"] {
+	display: block;
+	margin: 5px 5px;
+	width: 300px;
+	height: 40px;
+	border: none;
+	border-radius: 5px;
+	padding: 0px;
+	display: inline-block;
+}
+
+.butDate {
+	width: 100px;
+	height: 40px;
+	margin: 5px 5px;
+	font-size: 15px;
+	color: rgb(0, 0, 0);
+	background-color: rgb(157, 157, 157);
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: 0.3s;
+	display: inline-block;
+}
+
+.butDate:hover {
+	color: red;
+	background-color: yellow;
+}
+
+.fields {
+	margin-top: 20px;
+}
+
+.mytitle {
+	text-align: center;
+	font-size: 15x;
+	margin: 0px auto;
+}
+
+.link_signin {
+	font: italic 15px/1.5 Arial, sans-serif;
+}
+
+.foot {
+	margin: 20px auto;
+	text-align: center;
+}
+
+ .sidebar { /* Левая колонка */
+    float: left; /* Обтекание справа */
+    border: 1px solid #333; /* Параметры рамки вокруг */
+    width: 20%; /* Ширина колонки */
+    padding: 5px; /* Поля вокруг текста */
+    margin: 0px 10px 20px 5px; /* Значения отступов */
+   }
+
+/* .content {
+	margin-left: 130px; Отступ слева
+	padding: 10px; Поля вокруг текста
+	background: #c0c0c0; Цвет фона правой колонки
+} */
+
+/*   .content { Правая колонка
+    margin: 10px 5px 20px 25%; Значения отступов
+    Поля вокруг текста
+    border: 1px solid #333; Параметры рамки
+    width:710px;
+   }
+     .content-inner { Правая колонка
+    margin: 0; Значения отступов
+    padding: 5px; Поля вокруг текста
+    border: 1px solid #333; Параметры рамки
+    width:700px;
+    text-align: center;
+   } */
+
+/* Style card*/
+.card {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	max-width: 300px;
+	margin: 10px;
+	text-align: center;
+	font-family: arial;
+	display: inline-block;
+}
+
+.price {
+	color: grey;
+	font-size: 22px;
+}
+
+/* .button {
+	border: none;
+	outline: 0;
+	padding: 12px 0px;
+	color: white;
+	background-color: #000;
+	text-align: center;
+	cursor: pointer;
+	width: 100%;
+	font-size: 18px;
+}
+
+.card button:hover {
+	opacity: 0.7;
+} */
+
+.filter{
+	display: block;
+}
+
+.conteiner {
+	width: 900px; /* Ширина слоя */
+	margin: 0 auto; /* Выравнивание по центру */
+	background: #f0f0f0; /* Цвет фона левой колонки */
+	
+}
+
+.picture{
+	width:80%;
+	height:auto;
+	margin:10px auto;
+	/* display: inline-block;	 */
+	padding: 20px;
+}
+
+.img-my{
+	width:100%;
+	height:auto;
+}
+
+.info{
+	display: flex;
+/*     position: absolute; */
+    width: 100%;
+    overflow-x: auto;
+}
+
+.fa, .far, .fas{
+	font-size: 20px;
+	color:black;
+}
+.button1{
+	border: none;
+	outline: 0;
+	padding: 12px 0px;
+	color: white;
+	background-color: #000;
+	text-align: center;
+	cursor: pointer;
+	width: 30%;
+	font-size: 18px;
+	margin: 0 auto;
+	margin-bottom: 20px;
+	border-radius: 10px;
+	display: block;
+}
+
+
+.button1:hover{
+	opacity: 0.7;
+	background-color: #808080;
+} 
+
+
+ .content { /* Правая колонка */
+    margin: 0 auto; /* Значения отступов */
+    padding: 0 20px;
+    border: 1px solid #333;
+    border-radius : 20px;
+    width:50%;
+    min-height: 200px;
+    text-align: center; 
+    background: #e6e3e6; 
+    text-align: left;
+  }
+     
+
+
+.table{
+	width: 90%;
+    margin: 10px auto;
+    text-align: center;
+}
+
+.message{
+	text-align: center;
+	color: red;
+}
