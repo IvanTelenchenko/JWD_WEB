@@ -29,7 +29,6 @@ public class ConstantParameter {
 	public static final String FIRSTNAME = "firstname";
 	
 //	public static final String GOTOCARSBASE = "gotocarsbase";
-
 	
 	public static final String LASTNAME = "lastname";
 	public static final String LOCAL = "local";
