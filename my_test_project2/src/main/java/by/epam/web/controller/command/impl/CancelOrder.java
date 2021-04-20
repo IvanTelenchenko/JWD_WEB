@@ -23,7 +23,6 @@ import by.epam.web.service.ServiceProvider;
 public class CancelOrder implements Command{
 	
 	private static final String MESSAGE_CANCEL = "&messageCancel=message";
-	
 	private static final Logger log = Logger.getLogger(CancelOrder.class);
 
 	@Override

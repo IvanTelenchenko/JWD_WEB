@@ -1,5 +1,10 @@
 package by.epam.web.controller.constant;
 
+/**
+ * This class represents the page to the path
+ * */
+
+
 public class ConstantPage {
 	
 	public static final String ADDNEWCAR = "/WEB-INF/jsp/AddNewCar.jsp";

@@ -1,5 +1,11 @@
 package by.epam.web.controller.constant;
 
+
+/**
+ * This class represents the request parameter
+ * */
+
+
 public class ConstantParameter {
 	
 	public static final String ADMIN = "admin";
