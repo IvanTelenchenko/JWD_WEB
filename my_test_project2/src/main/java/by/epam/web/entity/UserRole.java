@@ -1,5 +1,9 @@
 package by.epam.web.entity;
 
+
+/**
+ * This class consist of an enumeration of the user role
+ * */
 public enum UserRole {
 	ADMIN(1),
 	USER(2);

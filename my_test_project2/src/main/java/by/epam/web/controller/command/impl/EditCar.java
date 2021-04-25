@@ -25,8 +25,7 @@ import by.epam.web.service.exception.NotValidDataException;
 public class EditCar implements Command {
 	
 	
-	private static final String ERROR_MESSAGE_EDIT_CAR = "&errorMessage=error&errorLength=error"
-			+ "&errorDouble=error&errorInteger=error&carid=";
+	private static final String ERROR_MESSAGE_EDIT_CAR = "&errorMessage=error&carid=";
 	private static final String MESSAGE_EDIT_CAR = "&messageEditCar=message";
 	private static final Logger log = Logger.getLogger(EditCar.class);
 	
@@ -69,7 +68,7 @@ public class EditCar implements Command {
 					engineCapacity, numbOfSeats, photoName);
 		}catch (NotValidDataException e) {
 			log.error(e);
-			response.sendRedirect(ConstantPage.GOTOEDITCAR+ERROR_MESSAGE_EDIT_CAR+id);
+			response.sendRedirect(ConstantPage.GOTOEDITCAR+ERROR_MESSAGE_EDIT_CAR+id + e.getMessage());
 			return;
 		}catch (ServiceException e) {
 			log.error(e);

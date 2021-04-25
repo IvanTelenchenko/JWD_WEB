@@ -67,12 +67,17 @@ public class ImageLoader extends HttpServlet {
 		String uniqueNamePhoto;
 		
 //		System.out.println("part size > " + request.getPart("photo").getSize());
-	
 		
-		if(request.getPart(ATTRIBUTE_PHOTO).getSize() <= 0) {
+		Validator validator = new Validator();
+		
+		if(request.getPart(ATTRIBUTE_PHOTO).getSize() <= 0 ) {
 //			System.out.println("null!!!");
 			uniqueNamePhoto = null;
-		}else{
+		}else if(!validator.valiadateImage(request.getPart(ATTRIBUTE_PHOTO))){
+			Part photo = request.getPart(ATTRIBUTE_PHOTO);
+			String fileName = Paths.get(photo.getSubmittedFileName()).getFileName().toString();
+			uniqueNamePhoto = fileName;
+		}else {
 			Part photo = request.getPart(ATTRIBUTE_PHOTO);
 			uniqueNamePhoto = getUniqueName(photo);
 			photo.write(directory + uniqueNamePhoto);

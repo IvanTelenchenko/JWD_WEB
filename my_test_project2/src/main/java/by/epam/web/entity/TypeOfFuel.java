@@ -1,5 +1,9 @@
 package by.epam.web.entity;
 
+/**
+ * This class consist of an enumeration of the fuel type
+ * */
+
 public enum TypeOfFuel {
 
 	GASOLINE(1),

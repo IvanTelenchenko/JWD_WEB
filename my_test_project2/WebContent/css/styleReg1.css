@@ -22,6 +22,18 @@
 	font: bold 15px/1.5 Arial, sans-serif;
 }
 
+.error-message {
+	margin: 10px auto;
+	color: red;
+	font: bold 15px/1.5 Arial, sans-serif;
+}
+
+.success-message {
+	margin: 10px auto;
+	color: green;
+	font: bold 15px/1.5 Arial, sans-serif;
+}
+
 .form {
 /* 	width: 80%; */
 	/* position: absolute; */

@@ -27,7 +27,7 @@ public class ChangePassword implements Command {
 
 	private  static final String ERROR_MESSAGE_OLD_PASS = "&errorMessage=error&messageErrorOldPasswordNotEqual=error";
 	private  static final String ERROR_MESSAGE_PASS_NOT_EQUAL = "&errorMessage=error&messageErrorPasswordsNotEqual=error";
-	private  static final String ERROR_MESSAGE_PASS_NOT_VALID = "&errorMessage=error&messageErrorNotValid=error";
+	private  static final String ERROR_MESSAGE_PASS_NOT_VALID = "&errorMessage=error";
 	private  static final String MESSAGE_CHANGE_PASSWORD = "&messageChangePassword=message";
 	
 	private static final Logger log = Logger.getLogger(ChangePassword.class);
@@ -67,7 +67,7 @@ public class ChangePassword implements Command {
 			return;
 		}catch (NotValidDataException e) {
 			log.error(e);
-			response.sendRedirect(ConstantPage.GOTOCHANGEPASSWORD + ERROR_MESSAGE_PASS_NOT_VALID);
+			response.sendRedirect(ConstantPage.GOTOCHANGEPASSWORD + ERROR_MESSAGE_PASS_NOT_VALID + e.getMessage());
 			return;
 		}catch (ServiceException e) {
 			log.error(e);

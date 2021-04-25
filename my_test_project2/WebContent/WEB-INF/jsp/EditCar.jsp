@@ -123,7 +123,7 @@
 						<tr>
 							<td></td>
 							<td>
-								<c:if test="${param.errorLength != null}">
+								<c:if test="${param.errorLengthName != null}">
 									<div class="error-message" >${errorlength}</div>
 								</c:if>
 							</td>
@@ -139,7 +139,7 @@
 						<tr>
 							<td></td>
 							<td>
-								<c:if test="${param.errorDouble != null}">
+								<c:if test="${param.errorDoublePrice != null}">
 									<div class="error-message" >${errordouble}</div>
 								</c:if>
 							</td>
@@ -155,7 +155,7 @@
 						<tr>
 							<td></td>
 							<td>
-								<c:if test="${param.errorDouble != null}">
+								<c:if test="${param.errorDoubleCapacity != null}">
 									<div class="error-message" >${errordouble}</div>
 								</c:if>
 							</td>
@@ -171,7 +171,7 @@
 						<tr>
 							<td></td>
 							<td>
-								<c:if test="${param.errorInteger != null}">
+								<c:if test="${param.errorIntegerSeats != null}">
 									<div class="error-message" >${errorinteger}</div>
 								</c:if>
 							</td>
@@ -186,6 +186,14 @@
 								<p>
    									<input type="file" name="photo" accept="image/*" value="${car.photo}"/>
 								</p> 
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<c:if test="${param.errorImageNull != null}">
+									<div class="error-message" >${errorimage}</div>
+								</c:if>
 							</td>
 						</tr>
 						</table>

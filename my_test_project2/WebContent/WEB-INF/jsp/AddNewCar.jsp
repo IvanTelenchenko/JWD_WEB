@@ -117,6 +117,14 @@
 							</td>
 						</tr>
 						<tr>
+						<td></td>
+							<td>
+								<c:if test="${param.errorLengthName != null}">
+									<div class="error-message" >${errorlength}</div>
+								</c:if>
+							</td>
+						</tr>
+						<tr>
 							<td> ${costday}</td>
 							<td>
 								<p>
@@ -124,6 +132,14 @@
 								</p> 
 							</td>
 						</tr>
+						<tr>
+						<td></td>
+							<td>
+								<c:if test="${param.errorDoublePrice != null}">
+									<div class="error-message" >${errordouble}</div>
+								</c:if>
+							</td>
+						</tr>	
 						<tr>
 							<td> ${enginecapacity}</td>
 							<td>
@@ -133,11 +149,27 @@
 							</td>
 						</tr>
 						<tr>
+							<td></td>
+							<td>
+								<c:if test="${param.errorDoubleCapacity != null}">
+									<div class="error-message" >${errordouble}</div>
+								</c:if>
+							</td>
+						</tr>
+						<tr>
 							<td>${numofseats}</td>
 							<td>
 								<p>
    									<input type="text" name="numofseats" placeholder="${numofseats}" required />
 								</p> 
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<c:if test="${param.errorIntegerSeats != null}">
+									<div class="error-message" >${errorinteger}</div>
+								</c:if>
 							</td>
 						</tr>
 						<tr>
@@ -150,6 +182,14 @@
  										<input id="files" style="visibility:hidden;" type="file">
 									</div> -->
 								</p> 
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<c:if test="${param.errorImageNull != null}">
+									<div class="error-message" >${errorimage}</div>
+								</c:if>
 							</td>
 						</tr>
 						</table>

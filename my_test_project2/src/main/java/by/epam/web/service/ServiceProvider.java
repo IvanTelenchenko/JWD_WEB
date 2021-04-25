@@ -4,7 +4,11 @@ import by.epam.web.service.impl.ServiceCarImpl;
 import by.epam.web.service.impl.ServiceOrderImpl;
 import by.epam.web.service.impl.ServiceUserImpl;
 
-public class ServiceProvider {
+/**
+ * This class represents access to {@link ServiceUser}, {@link ServiceCar},{@link ServiceOrder}
+ * */
+
+public final class ServiceProvider {
 	
 	private static final ServiceProvider instance = new ServiceProvider();
 	

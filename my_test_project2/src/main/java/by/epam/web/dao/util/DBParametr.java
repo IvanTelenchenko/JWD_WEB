@@ -1,5 +1,9 @@
 package by.epam.web.dao.util;
 
+/**
+ * This class represents the parameters for the database
+ * */
+
 public final class DBParametr {
 	
 	private DBParametr() {}

@@ -25,27 +25,27 @@
 					<div class="change-input">
 						
 						<input type="password" name="oldpassword" placeholder="${oldpassword}" required />
-						<c:if test="${param.messageErrorNotValid != null}">
-							<div class="validMessage" >${errormessagepassword}</div>
+						<c:if test="${param.messageErrorNotValidOldPassword != null}">
+							<div class="error-message" >${errormessagepassword}</div>
 						</c:if>
 						
 						<c:if test="${param.messageErrorOldPasswordNotEqual != null }">
-							<div class="validMessage" >${errormessagepassword}</div>
+							<div class="error-message" >${errormessagepassword}</div>
 						</c:if>
 						
 						<input type="password" name="newpassword" placeholder="${newpassword}" required />
-						<c:if test="${param.messageErrorNotValid != null}">
-							<div class="validMessage" >${errormessagepassword}</div>
+						<c:if test="${param.messageErrorNotValidNewPassword != null}">
+							<div class="error-message" >${errormessagepassword}</div>
 						</c:if>	
 						
 						<c:if test="${param.messageErrorPasswordsNotEqual != null }">
-							<div class="validMessage" >${messagepasswordsnotequal}</div>
+							<div class="error-message" >${messagepasswordsnotequal}</div>
 						</c:if>
 						
 						<input type="password" name="newpasswordrepeat" placeholder="${passwordrepeat}" required />
-						<c:if test="${param.messageErrorNotValid != null}">
-							<div class="validMessage" >${errormessagepassword}</div>
-						</c:if>		
+						<%-- <c:if test="${param.messageErrorNotValid != null}">
+							<div class="error-message" >${errormessagepassword}</div>
+						</c:if>		 --%>
 					</div>
 					<input class="buttonCh" type="submit" name="button" value="${changepassword}" />
 				</form>

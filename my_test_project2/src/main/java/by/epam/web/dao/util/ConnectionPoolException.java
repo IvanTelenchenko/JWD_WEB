@@ -1,6 +1,12 @@
 package by.epam.web.dao.util;
 
-public class ConnectionPoolException extends RuntimeException{
+
+
+/**
+ * This class represents an exception that can be thrown on {@link ConnectionPool}
+ * */
+
+public final class ConnectionPoolException extends RuntimeException{
 
 
 	private static final long serialVersionUID = 1L;

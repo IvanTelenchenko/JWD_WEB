@@ -27,9 +27,7 @@ import by.epam.web.service.exception.NotValidDataException;
 public class Registration implements Command{
 	
 	private static final Logger log = Logger.getLogger(Registration.class);
-	private static final String ERROR_MESSAGE_NOT_VALID = "&errorMessage=error&"
-					+ "errorEmail=error&errorFirstname=error&errorLastname=error&"
-					+ "errorPhone=error&errorPassword=error";
+	private static final String ERROR_MESSAGE_NOT_VALID = "&errorMessage=error";
 	private static final String ERROR_MESSAGE_EMAIL_BUSY = "&errorEmailBusy=error";
 	private static final String MESSAGE_REG = "&messageReg=message";
 
@@ -51,11 +49,13 @@ public class Registration implements Command{
 			serviceReg.registration(firstname, lastname, email, password, phoneNumber);
 		} catch (NotValidDataException e) {
 			log.error(e);
-			response.sendRedirect(ConstantPage.GOTOREGISTRATION + ERROR_MESSAGE_NOT_VALID);
+//			response.sendRedirect(ConstantPage.GOTOREGISTRATION + ERROR_MESSAGE_NOT_VALID);
+			response.sendRedirect(ConstantPage.GOTOREGISTRATION + ERROR_MESSAGE_NOT_VALID + e.getMessage());
 			return;
 		}catch (ImpossibleExecuteException e) {
 			log.error(e);
 			response.sendRedirect(ConstantPage.GOTOREGISTRATION + ERROR_MESSAGE_EMAIL_BUSY);
+			return;
 		} catch (ServiceException e) {
 			log.error(e);
 			response.sendRedirect(ConstantPage.GOTOERROR500);

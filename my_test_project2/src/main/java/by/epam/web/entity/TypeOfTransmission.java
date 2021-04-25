@@ -1,5 +1,9 @@
 package by.epam.web.entity;
 
+/**
+ * This class consist of an enumeration of the transmission type
+ * */
+
 public enum TypeOfTransmission {
 	MANUAL(1),
 	AUTOMATIC(2),

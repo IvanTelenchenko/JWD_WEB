@@ -2,9 +2,13 @@ package by.epam.web.entity;
 
 import java.io.Serializable;
 
+/**
+ * This class represents the User entity
+ * */
+
 public final class User implements Serializable {
 	
-	private static final long serialVersionUID = 6969810057283399738L;
+	private static final long serialVersionUID = 1L;
 	
 	private int id;
 	private String firstName;
@@ -14,6 +18,23 @@ public final class User implements Serializable {
 	private String phoneNumber;
 	private UserRole role;
 	
+	
+	/**
+	 * Creates an instance of a new {@link User}
+	 * */
+	public User() {
+	}
+	
+	/**
+	 * Creates an instance of a new {@link User}
+	 * @param id user ID
+	 * @param email user's email address 
+	 * @param password user account password
+	 * @param firstname user name
+	 * @param lastname user surname
+	 * @param phoneNumber user's phone number
+	 * @param role user role {@link UserRole}
+	 * */
 	public User(int id, String email, String password, String firstname, String lastname,  String phoneNumber, UserRole role) {
 		this.id = id;
 		this.firstName = firstname;
@@ -24,6 +45,16 @@ public final class User implements Serializable {
 		this.role = role;
 	}
 	
+	/**
+	 * Creates an instance of a new {@link User}
+	 * @param id user ID
+	 * @param email user's email address 
+	 * @param password user account password
+	 * @param firstname user name
+	 * @param lastname user surname
+	 * @param phoneNumber user's phone number
+	 * @param role user role
+	 * */
 	public User(int id, String email, String password, String firstname, String lastname, String phoneNumber, int role) {
 		this.id = id;
 		this.firstName = firstname;

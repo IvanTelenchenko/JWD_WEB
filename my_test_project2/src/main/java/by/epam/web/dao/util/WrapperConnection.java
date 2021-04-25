@@ -21,7 +21,11 @@ import java.util.Properties;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executor;
 
-public class WrapperConnection implements Connection, Serializable{
+/**
+ * This class represents a wrapper of {@link COnnection} 
+ * */
+
+public final class WrapperConnection implements Connection, Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	

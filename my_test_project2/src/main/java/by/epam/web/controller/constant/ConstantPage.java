@@ -1,7 +1,7 @@
 package by.epam.web.controller.constant;
 
 /**
- * This class represents the page to the path
+ * This class represents the enumeration paths to the pages
  * */
 
 
@@ -29,7 +29,7 @@ public class ConstantPage {
 	public static final String GOTOMAINPAGE = "Controller?command=mainpage";
 	public static final String GOTOSIGNIN = "Controller?command=gotosignin";
 	public static final String GOTOORDERHISTORY = "Controller?command=gotoorderhistory";
-	public static final String GOTOADDCAR = "Controller?command=gotoaddcar";
+	public static final String GOTOADDNEWCAR = "Controller?command=gotoaddnewcar";
 	public static final String GOTOCARSBASE = "Controller?command=gotocarsbase";
 	public static final String GOTOCHANGEPASSWORD = "Controller?command=gotochangepassword";
 	public static final String GOTOPERSONALDATA = "Controller?command=gotopersonaldata";

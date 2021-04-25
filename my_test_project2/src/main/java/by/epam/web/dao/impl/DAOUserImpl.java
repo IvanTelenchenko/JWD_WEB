@@ -11,8 +11,8 @@ import org.apache.log4j.Logger;
 
 import by.epam.web.dao.DAOException;
 import by.epam.web.dao.DAOUser;
-import by.epam.web.dao.MySQLDriverLoader;
 import by.epam.web.dao.util.ConnectionPool;
+import by.epam.web.dao.util.MySQLDriverLoader;
 import by.epam.web.dao.util.WrapperConnection;
 import by.epam.web.entity.User;
 
@@ -29,7 +29,7 @@ public class DAOUserImpl implements DAOUser {
 
 	private static final String DAO_USER_INSERT_INTO_DB = "INSERT INTO users(firstname,lastname,email,password,phone_number)"
 			+ "VALUES(?,?,?,?,?);";
-	private static final String DAO_USER_SELECT_ALL_USERS = "SELECT email, password FROM users;";
+//	private static final String DAO_USER_SELECT_ALL_USERS = "SELECT email, password FROM users;";
 
 	private static final String DAO_USER_SELECT_PASSWORD = "SELECT password FROM users WHERE id = ?;";
 
@@ -79,7 +79,7 @@ public class DAOUserImpl implements DAOUser {
 				ps.setString(4, password);
 				ps.setString(5, phoneNumber);
 
-				int i = ps.executeUpdate();
+//				int i = ps.executeUpdate();
 			}
 
 			return true;
@@ -129,33 +129,33 @@ public class DAOUserImpl implements DAOUser {
 		}
 	}
 
-	@Override
-	public List<User> getAllUsers() throws DAOException {
-
-		List<User> list = new ArrayList<User>();
-
-		try {
-			connection = ConnectionPool.getConnection();
-
-			Statement st = connection.createStatement();
-			ResultSet rs = st.executeQuery(DAO_USER_SELECT_ALL_USERS);
-
-			while (rs.next()) {
-				list.add(new User(rs.getString(1), rs.getString(2)));
-			}
-			return list;
-		} catch (SQLException e) {
-			log.error(e);
-			throw new DAOException(e);
-		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				log.error(e);
-				throw new DAOException(e);
-			}
-		}
-	}
+//	@Override
+//	public List<User> getAllUsers() throws DAOException {
+//
+//		List<User> list = new ArrayList<User>();
+//
+//		try {
+//			connection = ConnectionPool.getConnection();
+//
+//			Statement st = connection.createStatement();
+//			ResultSet rs = st.executeQuery(DAO_USER_SELECT_ALL_USERS);
+//
+//			while (rs.next()) {
+//				list.add(new User(rs.getString(1), rs.getString(2)));
+//			}
+//			return list;
+//		} catch (SQLException e) {
+//			log.error(e);
+//			throw new DAOException(e);
+//		} finally {
+//			try {
+//				connection.close();
+//			} catch (SQLException e) {
+//				log.error(e);
+//				throw new DAOException(e);
+//			}
+//		}
+//	}
 
 	@Override
 	public String getPassword(int id) throws DAOException {

@@ -2,7 +2,7 @@ package by.epam.web.controller.constant;
 
 
 /**
- * This class represents the request parameter
+ * This class represents the enumeration parameters
  * */
 
 

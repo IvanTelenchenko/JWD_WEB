@@ -58,35 +58,69 @@ public class ServiceUserImpl implements ServiceUser {
 		
 		Validator validator = new Validator();
 		
+		StringBuilder messageError = new StringBuilder();
 		
-		if(!validator.valiadateEmail(email) || !validator.valiadateMaxLength100(email)) {
-//			validMessage.put("validEmail", "The email has been entered incorrectly (Example: email@email.com). Max length 100 letters.");
+//		if(!validator.valiadateEmail(email) || !validator.valiadateMaxLength100(email)) {
+//			log.info("Email has been entered incorrectly");
+//			throw new NotValidDataException("Email has been entered incorrectly");
+//		}
+//
+//		if(!validator.valiadateName(firstname)) {
+//			log.info("Firstname has been entered incorrectl");
+//			throw new NotValidDataException("Firstname has been entered incorrectl");
+//		}
+//		
+//		if(!validator.valiadateName(lastname)) {
+//			log.info("Lastname has been entered incorrectly");
+//			throw new NotValidDataException("Lastname has been entered incorrectly");
+//		}
+//		
+//		if(!validator.valiadatePhone(phoneNumber)) {
+//			log.info("Phone number has been entered incorrectly");
+//			throw new NotValidDataException("Phone number has been entered incorrectly");
+//		}
+//		
+//		if(!validator.valiadatePassword(password)) {
+//			log.info("Phone number has been entered incorrectly");
+//			throw new NotValidDataException("Phone number has been entered incorrectly");
+//		}
+		
+//		private static final String ERROR_MESSAGE_NOT_VALID = "&errorMessage=error&"
+//				+ "errorEmail=error&errorFirstname=error&errorLastname=error&"
+//				+ "errorPhone=error&errorPassword=error";
+		
+		if (!validator.valiadateEmail(email) || !validator.valiadateMaxLength100(email)) {
 			log.info("Email has been entered incorrectly");
-			throw new NotValidDataException("Email has been entered incorrectly");
+//			throw new NotValidDataException("Email has been entered incorrectly");
+			messageError.append("&errorEmail=error");
 		}
 
-		if(!validator.valiadateName(firstname)) {
-//			validMessage.put("validFirstname", "Firstname has been entered incorrectly (Example: Ivanov,Иванов ). Max length 23 letters.");
+		if (!validator.valiadateName(firstname)) {
 			log.info("Firstname has been entered incorrectl");
-			throw new NotValidDataException("Firstname has been entered incorrectl");
+//			throw new NotValidDataException("Firstname has been entered incorrectl");
+			messageError.append("&errorFirstname=error");
 		}
-		
-		if(!validator.valiadateName(lastname)) {
-//			validMessage.put("validLastname", "Lastname has been entered incorrectly (Example: Ivan,Иван). Max length 23 letters.");
+
+		if (!validator.valiadateName(lastname)) {
 			log.info("Lastname has been entered incorrectly");
-			throw new NotValidDataException("Lastname has been entered incorrectly");
+//			throw new NotValidDataException("Lastname has been entered incorrectly");
+			messageError.append("&errorLastname=error");
+		}
+
+		if (!validator.valiadatePhone(phoneNumber)) {
+			log.info("Phone number has been entered incorrectly");
+//			throw new NotValidDataException("Phone number has been entered incorrectly");
+			messageError.append("&errorPhone=error");
+		}
+
+		if (!validator.valiadatePassword(password)) {
+			log.info("Phone number has been entered incorrectly");
+//			throw new NotValidDataException("Phone number has been entered incorrectly");
+			messageError.append("&errorPassword=error");
 		}
 		
-		if(!validator.valiadatePhone(phoneNumber)) {
-//			validMessage.put("validPhone", "Phone number has been entered incorrectly (Example: +375447621975, 80447621975). Min length 9 letters and max length 15 letters");
-			log.info("Phone number has been entered incorrectly");
-			throw new NotValidDataException("Phone number has been entered incorrectly");
-		}
-		
-		if(!validator.valiadatePassword(password)) {
-//			validMessage.put("validPassword", "Password has been entered incorrectly (Example: Password1, 123pasSword). Min length 6 letters and max length 20 letters");
-			log.info("Phone number has been entered incorrectly");
-			throw new NotValidDataException("Phone number has been entered incorrectly");
+		if(messageError.toString().length() > 0) {
+			throw new NotValidDataException(messageError.toString());
 		}
 		
 		try {
@@ -126,16 +160,19 @@ public class ServiceUserImpl implements ServiceUser {
 		
 		Validator validator = new Validator();
 		
+//		StringBuilder messageError = new StringBuilder();
+		
 		if(!validator.valiadatePassword(oldPassword)) {
 //			validMessage.put("validOldPassword", "Password has been entered incorrectly (Example: Password1, 123pasSword). Min length 6 letters and max length 20 letters");
 			log.info("Old password has been entered incorrectly");
-			throw new NotValidDataException("Old password has been entered incorrectly");
+			throw new NotValidDataException("&messageErrorNotValidOldPassword=error");
 		}
 		
 		if(!validator.valiadatePassword(newPassword)) {
 //			validMessage.put("validNewPassword", "Password has been entered incorrectly (Example: Password1, 123pasSword). Min length 6 letters and max length 20 letters");
 			log.info("New password has been entered incorrectly");
-			throw new NotValidDataException("New password has been entered incorrectly");
+			throw new NotValidDataException("&messageErrorNotValidNewPassword=errory");
+//			messageError.append("&messageErrorNotValidNewPassword=error");
 		}
 		
 //		if(!newPassword.equals(newPasswordRepeat)){
@@ -197,29 +234,62 @@ public class ServiceUserImpl implements ServiceUser {
 		
 		Validator validator = new Validator();
 		
-		if(!validator.valiadateEmail(email) || !validator.valiadateMaxLength100(email)) {
-//			validMessage.put("validEmail", "The email has been entered incorrectly (Example: email@email.com). Max length 100 letters.");
+		StringBuilder messageError = new StringBuilder();
+		
+		if (!validator.valiadateEmail(email) || !validator.valiadateMaxLength100(email)) {
 			log.info("Email has been entered incorrectly");
-			throw new NotValidDataException("Email has been entered incorrectly");
+//			throw new NotValidDataException("Email has been entered incorrectly");
+			messageError.append("&errorEmail=error");
 		}
 
-		if(!validator.valiadateName(firstname)) {
-//			validMessage.put("validFirstname", "Firstname has been entered incorrectly (Example: Ivanov,Иванов ). Max length 23 letters.");
+		if (!validator.valiadateName(firstname)) {
 			log.info("Firstname has been entered incorrectl");
-			throw new NotValidDataException("Firstname has been entered incorrectl");
+//			throw new NotValidDataException("Firstname has been entered incorrectl");
+			messageError.append("&errorFirstname=error");
 		}
-		
-		if(!validator.valiadateName(lastname)) {
-//			validMessage.put("validLastname", "Lastname has been entered incorrectly (Example: Ivan,Иван). Max length 23 letters.");
+
+		if (!validator.valiadateName(lastname)) {
 			log.info("Lastname has been entered incorrectly");
-			throw new NotValidDataException("Lastname has been entered incorrectly");
+//			throw new NotValidDataException("Lastname has been entered incorrectly");
+			messageError.append("&errorLastname=error");
+		}
+
+		if (!validator.valiadatePhone(phone)) {
+			log.info("Phone number has been entered incorrectly");
+//			throw new NotValidDataException("Phone number has been entered incorrectly");
+			messageError.append("&errorPhone=error");
+		}
+
+		
+		if(messageError.toString().length() > 0) {
+			throw new NotValidDataException(messageError.toString());
 		}
 		
-		if(!validator.valiadatePhone(phone)) {
-//			validMessage.put("validPhone", "Phone number has been entered incorrectly (Example: +375447621975, 80447621975). Min length 9 letters and max length 15 letters");
-			log.info("Phone number has been entered incorrectly");
-			throw new NotValidDataException("Phone number has been entered incorrectly");
-		}
+		
+		
+//		if(!validator.valiadateEmail(email) || !validator.valiadateMaxLength100(email)) {
+////			validMessage.put("validEmail", "The email has been entered incorrectly (Example: email@email.com). Max length 100 letters.");
+//			log.info("Email has been entered incorrectly");
+//			throw new NotValidDataException("Email has been entered incorrectly");
+//		}
+//
+//		if(!validator.valiadateName(firstname)) {
+////			validMessage.put("validFirstname", "Firstname has been entered incorrectly (Example: Ivanov,Иванов ). Max length 23 letters.");
+//			log.info("Firstname has been entered incorrectl");
+//			throw new NotValidDataException("Firstname has been entered incorrectl");
+//		}
+//		
+//		if(!validator.valiadateName(lastname)) {
+////			validMessage.put("validLastname", "Lastname has been entered incorrectly (Example: Ivan,Иван). Max length 23 letters.");
+//			log.info("Lastname has been entered incorrectly");
+//			throw new NotValidDataException("Lastname has been entered incorrectly");
+//		}
+//		
+//		if(!validator.valiadatePhone(phone)) {
+////			validMessage.put("validPhone", "Phone number has been entered incorrectly (Example: +375447621975, 80447621975). Min length 9 letters and max length 15 letters");
+//			log.info("Phone number has been entered incorrectly");
+//			throw new NotValidDataException("Phone number has been entered incorrectly");
+//		}
 		
 		try {
 			if(!checkEmail(email, id)){

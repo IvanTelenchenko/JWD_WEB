@@ -3,11 +3,7 @@ package by.epam.web.dao;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import by.epam.web.entity.Car;
-
 
 /**
  * This interface represents user's accept to the database car. 

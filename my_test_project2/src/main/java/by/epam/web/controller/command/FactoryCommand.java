@@ -42,7 +42,7 @@ import by.epam.web.controller.command.impl.MainPageWithFilter;
 import by.epam.web.controller.command.impl.Registration;
 
 /**
- * This class presents factory of commands. Based on the factory method pattern
+ * This class represents factory of commands. Based on the factory method pattern
  * */
 
 public class FactoryCommand {

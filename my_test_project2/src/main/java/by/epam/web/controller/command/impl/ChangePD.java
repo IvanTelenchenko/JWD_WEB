@@ -25,9 +25,7 @@ import by.epam.web.service.exception.NotValidDataException;
 
 public class ChangePD implements Command {
 
-	private static final String ERROR_MESSAGE_NOT_VALID = "&errorMessage=error&"
-					+ "errorEmail=error&errorFirstname=error&errorLastname=error&"
-					+ "errorPhone=error&errorPassword=error";
+	private static final String ERROR_MESSAGE_NOT_VALID = "&errorMessage=error";
 	private static final String ERROR_MESSAGE_DUPLICATE = "&errorMessage=error&errorDuplicate=error";
 	private static final String MESSAGE_CHANGE_PD = "&messageChangePD=message";
 	
@@ -61,11 +59,11 @@ public class ChangePD implements Command {
 			serviceUser.updatePD(firstname, lastname, email, phone, id);
 		}catch (NotValidDataException e) {
 			log.error(e);
-			response.sendRedirect(ConstantPage.CHANGEPD + ERROR_MESSAGE_NOT_VALID);
+			response.sendRedirect(ConstantPage.GOTOCHANGEPD + ERROR_MESSAGE_NOT_VALID + e.getMessage());
 			return;
 		}catch (DuplicateEmailException e) {
 			log.error(e);
-			response.sendRedirect(ConstantPage.CHANGEPD + ERROR_MESSAGE_DUPLICATE);
+			response.sendRedirect(ConstantPage.GOTOCHANGEPD + ERROR_MESSAGE_DUPLICATE);
 			return;
 		}	
 		catch (ServiceException e) {

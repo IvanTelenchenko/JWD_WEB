@@ -9,7 +9,11 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-public class EncodingFilter implements Filter{
+/**
+ * This class allows you to set the standard encoding
+ * */
+
+public final class EncodingFilter implements Filter{
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -17,8 +21,6 @@ public class EncodingFilter implements Filter{
 		
 		request.setCharacterEncoding(StandardCharsets.UTF_8.displayName());
 		response.setCharacterEncoding(StandardCharsets.UTF_8.displayName());
-		
-		System.out.println("!!!Filter!!!");
 		
 		chain.doFilter(request, response);
 	}

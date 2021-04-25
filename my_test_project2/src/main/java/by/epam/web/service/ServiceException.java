@@ -1,10 +1,10 @@
 package by.epam.web.service;
 
+/**
+ * This class represents an exception in the Service classes. 
+ * */
 public class ServiceException extends Exception {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public ServiceException() {

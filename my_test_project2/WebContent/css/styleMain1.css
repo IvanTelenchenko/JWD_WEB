@@ -395,6 +395,7 @@ input[type="text"], input[type="password"], input[type="date"] {
 }
 
 .successmessage{
+	color:green;
 	margin: 10px;
 	text-align: center;
 	font-size: 20px;

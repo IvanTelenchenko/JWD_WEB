@@ -129,6 +129,7 @@
 <fmt:message bundle="${loc}" key = "local.errorlength" var = "errorlength"/>
 <fmt:message bundle="${loc}" key = "local.errordouble" var = "errordouble"/>
 <fmt:message bundle="${loc}" key = "local.errorinteger" var = "errorinteger"/>
+<fmt:message bundle="${loc}" key = "local.errorimage" var = "errorimage"/>
 
 <fmt:message bundle="${loc}" key = "local.butcomplete" var = "complete"/>
 

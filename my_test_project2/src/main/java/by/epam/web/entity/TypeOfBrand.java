@@ -1,5 +1,9 @@
 package by.epam.web.entity;
 
+/**
+ * This class consist of an enumeration of the car brand
+ * */
+
 public enum TypeOfBrand {
 	AUDI(1),
 	BMW(2),

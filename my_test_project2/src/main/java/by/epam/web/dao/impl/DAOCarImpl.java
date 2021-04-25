@@ -17,8 +17,8 @@ import org.apache.log4j.Logger;
 
 import by.epam.web.dao.DAOCar;
 import by.epam.web.dao.DAOException;
-import by.epam.web.dao.MySQLDriverLoader;
 import by.epam.web.dao.util.ConnectionPool;
+import by.epam.web.dao.util.MySQLDriverLoader;
 import by.epam.web.dao.util.WrapperConnection;
 import by.epam.web.entity.Car;
 

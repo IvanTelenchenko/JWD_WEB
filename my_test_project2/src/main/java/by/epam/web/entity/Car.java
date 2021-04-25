@@ -2,9 +2,14 @@ package by.epam.web.entity;
 
 import java.io.Serializable;
 
+
+/**
+ * This class represents the Car entity
+ * */
+
 public final class Car implements Serializable{
 	
-	private static final long serialVersionUID = 182788671949603202L;
+	private static final long serialVersionUID = 1L;
 	
 	private int id;
 	private TypeOfBrand brand;
@@ -18,9 +23,26 @@ public final class Car implements Serializable{
 	private int numbOfSeats;
 	private String photo;
 	
+	
+	/**
+	 * Creates an instance of a new {@link Car}
+	 * */
 	public Car() {
-		
 	}
+	
+	/**
+	 * Creates an instance of a new {@link Car}
+	 * @param id Car ID
+	 * @param brand brand type ({@link TypeOfBrand})
+	 * @param body body type ({@link TypeOfBody})
+	 * @param transmission transmission type ({@link TypeOfTransmission})
+	 * @param classAuto class car type ({@link TypeOfClass})
+	 * @param fuel fuel type ({@link TypeOfFuel})
+	 * @param price the cost per day of booking a car
+	 * @param name full name car
+	 * @param engineCapacity car engine power
+	 * @param numbOfSeats number of seats 
+	 * */
 	
 	public Car(int id, TypeOfBrand brand, TypeOfBody body, TypeOfTransmission transmission, TypeOfClass classAuto,
 			TypeOfFuel fuel, double price, String name, double engineCapacity, int numbOfSeats, String photo) {
@@ -36,7 +58,21 @@ public final class Car implements Serializable{
 		this.numbOfSeats = numbOfSeats;
 		this.photo = photo;
 	}
-
+	
+	
+	/**
+	 * Creates an instance of a new {@link Car}
+	 * @param id Car ID
+	 * @param brand brand type
+	 * @param body body type
+	 * @param transmission transmission type
+	 * @param classAuto class car type
+	 * @param fuel fuel type
+	 * @param price the cost per day of booking a car
+	 * @param name full name car
+	 * @param engineCapacity car engine power
+	 * @param numbOfSeats number of seats 
+	 * */
 	public Car(int id, int brand, int body, int transmission, int classAuto, int fuel, double price, String name,
 			double engineCapacity, int numbOfSeats, String photo) {
 		

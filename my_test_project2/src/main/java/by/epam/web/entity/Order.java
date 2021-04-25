@@ -1,13 +1,15 @@
 package by.epam.web.entity;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Order implements Serializable{
+/**
+ * This class represents the Order entity
+ * */
+
+public final class Order implements Serializable{
 	
-	private static final long serialVersionUID = 9003788335741322938L;
+	private static final long serialVersionUID = 1L;
 	
 	int id;
 	int userId;
@@ -17,6 +19,23 @@ public class Order implements Serializable{
 	Date finish;
 	double totalCost;
 	
+	/**
+	 * Creates an instance of a new {@link Order}
+	 * */
+	
+	public Order(){
+	}
+	
+	/**
+	 * Creates an instance of a new {@link Order}
+	 * @param id order ID
+	 * @param userId user ID
+	 * @param car car ID
+	 * @param status order status({@link OrderStatus})
+	 * @param start booking start date
+	 * @param finish booking end date
+	 * @param totalCost total order cost
+	 * */
 	public Order(int id, int userId, int car, OrderStatus status, Date start, Date finish, double totalCost) {
 		super();
 		this.id = id;
@@ -28,6 +47,17 @@ public class Order implements Serializable{
 		this.totalCost = totalCost;
 	}
 	
+	
+	/**
+	 * Creates an instance of a new {@link Order}
+	 * @param id order ID
+	 * @param userId user ID
+	 * @param car car ID
+	 * @param status order status
+	 * @param start booking start date
+	 * @param finish booking end date
+	 * @param totalCost total order cost
+	 * */
 	public Order(int id, int userId, int car, int status, Date start, Date finish, double totalCost) {
 		super();
 		this.id = id;

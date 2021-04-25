@@ -1,6 +1,10 @@
-package by.epam.web.dao;
+package by.epam.web.dao.util;
 
-public class DBDriverLoaderException extends RuntimeException{
+/**
+ * This class represents an exception that can be thrown on {@link MySQLDriverLoader}
+ * */
+
+public final class DBDriverLoaderException extends RuntimeException{
 
 	private static final long serialVersionUID = 1L;
 

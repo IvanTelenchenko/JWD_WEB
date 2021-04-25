@@ -1,5 +1,9 @@
 package by.epam.web.entity;
 
+/**
+ * This class consist of an enumeration of the car class
+ * */
+
 public enum TypeOfClass {
 	ECONOMY(1),
 	MEDIUM(2),

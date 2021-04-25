@@ -4,6 +4,10 @@ import by.epam.web.dao.impl.DAOCarImpl;
 import by.epam.web.dao.impl.DAOOrderImpl;
 import by.epam.web.dao.impl.DAOUserImpl;
 
+/**
+ * This class represents access to {@link DAOUser}, {@link DAOCar},{@link DAOOrder}
+ * */
+
 public final class DAOProvider {
 	
 	private static final DAOProvider instance = new DAOProvider();

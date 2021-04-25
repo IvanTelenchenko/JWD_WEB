@@ -21,7 +21,7 @@
 			</c:if>
 			
 			<c:if test="${param.errorDuplicate != null }">
-				<div class="validMessage" >Duplicate email!</div>
+				<div class="error-message" >Duplicate email!</div>
 			</c:if>
 			
 				<form class="form" action="Controller" method="post">
@@ -29,22 +29,22 @@
 					<div class="change-input">			
 								<input type="text" name="firstname" placeholder="${firstname}" value="${user.firstName}" required />
 								<c:if test="${param.errorFirstname != null}">
-									<div class="validMessage" >${errormessagefirstname}</div>
+									<div class="error-message" >${errormessagefirstname}</div>
 								</c:if>
 							
 								<input type="text" name="lastname" placeholder="${lastname}" value="${user.lastName}" required />
 								<c:if test="${param.errorLastname != null}">
-									<div class="validMessage" >${errormessagelastname}</div>
+									<div class="error-message" >${errormessagelastname}</div>
 								</c:if>
 								
 								<input type="text" name="email" placeholder="${email}" value="${user.email}"required />
 								<c:if test="${param.errorEmail != null}">
-									<div class="validMessage" >${errormessageemail}</div>
+									<div class="error-message" >${errormessageemail}</div>
 								</c:if>
 								
 								<input type="text" name="phone" placeholder="${phone}" value="${user.phoneNumber}"required />
 								<c:if test="${param.errorPhone != null}">
-									<div class="validMessage" >${errormessagephone}</div>
+									<div class="error-message" >${errormessagephone}</div>
 								</c:if>
 								
 					</div>

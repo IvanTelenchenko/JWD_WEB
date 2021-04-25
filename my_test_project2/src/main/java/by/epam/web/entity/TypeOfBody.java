@@ -1,5 +1,9 @@
 package by.epam.web.entity;
 
+/**
+ * This class consist of an enumeration of the car body
+ * */
+
 public enum TypeOfBody {
 
 	HATCHBACK(1),
