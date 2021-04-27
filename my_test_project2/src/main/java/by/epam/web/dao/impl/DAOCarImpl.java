@@ -22,7 +22,7 @@ import by.epam.web.dao.util.MySQLDriverLoader;
 import by.epam.web.dao.util.WrapperConnection;
 import by.epam.web.entity.Car;
 
-public class DAOCarImpl implements DAOCar {
+public final class DAOCarImpl implements DAOCar {
 
 	static {
 		MySQLDriverLoader.getInstance();
@@ -36,57 +36,28 @@ public class DAOCarImpl implements DAOCar {
 	private static final String DAO_CAR_SELECT_CAR_WITH_DATE = "SELECT *FROM cars	" + "WHERE cars.id " + "NOT IN "
 			+ "(SELECT orders.car_id FROM orders WHERE orders.end_date >= ? AND orders.start_date <= ? AND orders.status IN (1,2));";
 
-	private static final String DAO_CAR_DELETE_CAR = "DELETE FROM cars " + 
-			"WHERE cars.id=? and cars.id NOT IN (SELECT orders.car_id FROM orders WHERE orders.status in(1,2));";
-	
+	private static final String DAO_CAR_DELETE_CAR = "DELETE FROM cars "
+			+ "WHERE cars.id=? and cars.id NOT IN (SELECT orders.car_id FROM orders WHERE orders.status in(1,2));";
+
 	private static final String DAO_CAR_ADD_NEW_CAR = "INSERT INTO `garage`.`cars` "
-			+ "( `brand`, `body`, `transmission`, `class`,`fuel`,`price`," + 
-			"  `full_name` ,`engine_capacity`, `numb_of_seats`,  `photo`) " + 
-			"  VALUES (?,?,?,?,?,?,?,?,?,?);";
-	
-	private static final String DAO_CAR_EDIT_CAR_WITHOUT_PHOTO = "UPDATE cars SET "
-			+ "brand = ?,"
-			+ "body = ?,"
-			+ "transmission = ?,"
-			+ "class = ?,"
-			+ "fuel = ?,"
-			+ "price = ?,"
-			+ "full_name = ?,"
-			+ "engine_capacity = ?,"
-			+ "numb_of_seats = ? "
-			+ "WHERE id = ?;";
-	
-//	UPDATE cars SET
-//	`brand` = 1,
-//	`body` = 1,
-//	`transmission` = 1,
-//	`class` = 1,
-//	`fuel` = 1,
-//	`price` = 3,
-//	`full_name` = 'car',
-//	`engine_capacity` = 1.1,
-//	`numb_of_seats` = 6
-//	WHERE id = 64;
-	
-	
-	private static final String DAO_CAR_EDIT_CAR_WITH_PHOTO = "UPDATE cars SET "
-			+ "brand = ?,"
-			+ "body = ?,"
-			+ "transmission = ?,"
-			+ "class = ?,"
-			+ "fuel = ?,"
-			+ "price = ?,"
-			+ "full_name = ?,"
-			+ "engine_capacity = ?,"
-			+ "numb_of_seats = ?,"
-			+ "photo = ? "
-			+ "WHERE id = ?;";
-	
-	
+			+ "( `brand`, `body`, `transmission`, `class`,`fuel`,`price`,"
+			+ "  `full_name` ,`engine_capacity`, `numb_of_seats`,  `photo`) " + "  VALUES (?,?,?,?,?,?,?,?,?,?);";
+
+	private static final String DAO_CAR_EDIT_CAR_WITHOUT_PHOTO = "UPDATE cars SET " + "brand = ?," + "body = ?,"
+			+ "transmission = ?," + "class = ?," + "fuel = ?," + "price = ?," + "full_name = ?,"
+			+ "engine_capacity = ?," + "numb_of_seats = ? " + "WHERE id = ?;";
+
+	private static final String DAO_CAR_EDIT_CAR_WITH_PHOTO = "UPDATE cars SET " + "brand = ?," + "body = ?,"
+			+ "transmission = ?," + "class = ?," + "fuel = ?," + "price = ?," + "full_name = ?,"
+			+ "engine_capacity = ?," + "numb_of_seats = ?," + "photo = ? " + "WHERE id = ?;";
+
 	private WrapperConnection connection;
 
 	@Override
 	public List<Car> getAllCars(List<String> date) throws DAOException {
+
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 
 		List<Car> list = new ArrayList<Car>();
 
@@ -104,18 +75,17 @@ public class DAOCarImpl implements DAOCar {
 				throw new DAOException(e);
 			}
 
-			PreparedStatement ps = connection.prepareStatement(DAO_CAR_SELECT_CAR_WITH_DATE);
+			ps = connection.prepareStatement(DAO_CAR_SELECT_CAR_WITH_DATE);
 			ps.setTimestamp(1, new Timestamp(startDate.getTime()));
 			ps.setTimestamp(2, new Timestamp(endDate.getTime()));
 
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 
 			while (rs.next()) {
 
 				Car car = new Car(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6),
 						rs.getDouble(7), rs.getString(8), rs.getDouble(9), rs.getInt(10), rs.getString(11));
 				list.add(car);
-//				System.out.println(car);
 			}
 
 			return list;
@@ -124,6 +94,22 @@ public class DAOCarImpl implements DAOCar {
 			log.error(e);
 			throw new DAOException(e);
 		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
 			try {
 				connection.close();
 			} catch (SQLException e) {
@@ -136,16 +122,19 @@ public class DAOCarImpl implements DAOCar {
 	@Override
 	public Car getCar(int id) throws DAOException {
 
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
 		Car car = null;
 
 		try {
 			connection = ConnectionPool.getConnection();
 
-			PreparedStatement ps = connection.prepareStatement(DAO_CAR_SELECT_CAR);
+			ps = connection.prepareStatement(DAO_CAR_SELECT_CAR);
 
 			ps.setInt(1, id);
 
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 
 			while (rs.next()) {
 
@@ -158,6 +147,22 @@ public class DAOCarImpl implements DAOCar {
 			log.error(e);
 			throw new DAOException(e);
 		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
 			try {
 				connection.close();
 			} catch (SQLException e) {
@@ -169,6 +174,9 @@ public class DAOCarImpl implements DAOCar {
 
 	@Override
 	public List<Car> getCarsWithFilter(Map<String, List<String>> map, List<String> date) throws DAOException {
+
+		Statement st = null;
+		ResultSet rs = null;
 
 		List<Car> list = new ArrayList<Car>();
 
@@ -187,10 +195,7 @@ public class DAOCarImpl implements DAOCar {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date startDate = null;
 		Date endDate = null;
-		System.out.println("date" + date);
-		System.out.println(date.get(0));
-		System.out.println(date.get(1));
-		
+
 		try {
 			startDate = format.parse(date.get(0));
 			endDate = format.parse(date.get(1));
@@ -205,15 +210,13 @@ public class DAOCarImpl implements DAOCar {
 		String newVal = value.toString();
 		newVal += "AND cars.id NOT IN (SELECT orders.car_id FROM orders " + " WHERE orders.end_date > '" + start
 				+ "' AND orders.start_date < '" + end + "' )";
-		System.out.println(newVal);
-
 		try {
 
 			connection = ConnectionPool.getConnection();
 
-			Statement st = connection.createStatement();
+			st = connection.createStatement();
 
-			ResultSet rs = st.executeQuery(DAO_CAR_SELECT_CAR_WITH_FILTER + newVal);
+			rs = st.executeQuery(DAO_CAR_SELECT_CAR_WITH_FILTER + newVal);
 
 			while (rs.next()) {
 				Car car = new Car(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6),
@@ -227,6 +230,22 @@ public class DAOCarImpl implements DAOCar {
 			log.error(e);
 			throw new DAOException(e);
 		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
+			if (st != null) {
+				try {
+					st.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
 			try {
 				connection.close();
 			} catch (SQLException e) {
@@ -238,13 +257,16 @@ public class DAOCarImpl implements DAOCar {
 
 	@Override
 	public List<Car> getCarsBase() throws DAOException {
+
+		Statement st = null;
+		ResultSet rs = null;
 		List<Car> list = new ArrayList<Car>();
 
 		try {
 			connection = ConnectionPool.getConnection();
 
-			Statement st = connection.createStatement();
-			ResultSet rs = st.executeQuery(DAO_CAR_SELECT_ALL_CARS);
+			st = connection.createStatement();
+			rs = st.executeQuery(DAO_CAR_SELECT_ALL_CARS);
 
 			while (rs.next()) {
 				Car car = new Car(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6),
@@ -257,6 +279,22 @@ public class DAOCarImpl implements DAOCar {
 			log.error(e);
 			throw new DAOException(e);
 		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
+			if (st != null) {
+				try {
+					st.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
 			try {
 				connection.close();
 			} catch (SQLException e) {
@@ -268,29 +306,39 @@ public class DAOCarImpl implements DAOCar {
 
 	@Override
 	public boolean deleteCar(int id) throws DAOException {
-		
+
+		PreparedStatement ps = null;
+
 		boolean isDeleteCar = false;
 		int row;
 
 		try {
 			connection = ConnectionPool.getConnection();
 
-			PreparedStatement ps = connection.prepareStatement(DAO_CAR_DELETE_CAR);
+			ps = connection.prepareStatement(DAO_CAR_DELETE_CAR);
 
 			ps.setInt(1, id);
 
 			row = ps.executeUpdate();
 
-			if(row > 0) {
+			if (row > 0) {
 				isDeleteCar = true;
 			}
-			
+
 			return isDeleteCar;
 
 		} catch (SQLException e) {
 			log.error(e);
 			throw new DAOException(e);
 		} finally {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
 			try {
 				connection.close();
 			} catch (SQLException e) {
@@ -302,19 +350,22 @@ public class DAOCarImpl implements DAOCar {
 
 	@Override
 	public boolean addNewCar(String brand, String body, String transmission, String classAuto, String fuel,
-			String price, String name, String engineCapacity, String numbOfSeats, String uniqueNamePhoto) throws DAOException {
-		
+			String price, String name, String engineCapacity, String numbOfSeats, String uniqueNamePhoto)
+			throws DAOException {
+
+		PreparedStatement ps = null;
+
 		boolean isAddCar = false;
 		int row;
-		
-		if(price.indexOf(',') != -1) {
+
+		if (price.indexOf(',') != -1) {
 			price = price.replace(',', '.');
 		}
-		
-		if(engineCapacity.indexOf(',') != -1) {
+
+		if (engineCapacity.indexOf(',') != -1) {
 			engineCapacity = engineCapacity.replace(',', '.');
 		}
-		
+
 		int brandInt = (Integer) Integer.parseInt(brand);
 		int bodyInt = (Integer) Integer.parseInt(body);
 		int transmissionInt = (Integer) Integer.parseInt(transmission);
@@ -323,12 +374,11 @@ public class DAOCarImpl implements DAOCar {
 		double priceDoub = (Double) Double.parseDouble(price);
 		double capacityDoub = (Double) Double.parseDouble(engineCapacity);
 		int seatsInt = (Integer) Integer.parseInt(numbOfSeats);
-		
-		
+
 		try {
 			connection = ConnectionPool.getConnection();
 
-			PreparedStatement ps = connection.prepareStatement(DAO_CAR_ADD_NEW_CAR);
+			ps = connection.prepareStatement(DAO_CAR_ADD_NEW_CAR);
 
 			ps.setInt(1, brandInt);
 			ps.setInt(2, bodyInt);
@@ -343,16 +393,24 @@ public class DAOCarImpl implements DAOCar {
 
 			row = ps.executeUpdate();
 
-			if(row > 0) {
+			if (row > 0) {
 				isAddCar = true;
 			}
-			
+
 			return isAddCar;
 
 		} catch (SQLException e) {
 			log.error(e);
 			throw new DAOException(e);
 		} finally {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
 			try {
 				connection.close();
 			} catch (SQLException e) {
@@ -363,22 +421,23 @@ public class DAOCarImpl implements DAOCar {
 	}
 
 	@Override
-	public boolean editCar(String id, String brand, String body, String transmission, String classAuto, String fuel, String price,
-			String name, String engineCapacity, String numbOfSeats, String photoName) throws DAOException {
-		
+	public boolean editCar(String id, String brand, String body, String transmission, String classAuto, String fuel,
+			String price, String name, String engineCapacity, String numbOfSeats, String photoName)
+			throws DAOException {
+
+		PreparedStatement ps = null;
+
 		boolean isEditCar = false;
 		int row;
-		
-		if(price.indexOf(',') != -1) {
+
+		if (price.indexOf(',') != -1) {
 			price = price.replace(',', '.');
 		}
-		
-		if(engineCapacity.indexOf(',') != -1) {
+
+		if (engineCapacity.indexOf(',') != -1) {
 			engineCapacity = engineCapacity.replace(',', '.');
 		}
-		
-		System.out.println(body);
-		
+
 		int idInt = (Integer) Integer.parseInt(id);
 		int brandInt = (Integer) Integer.parseInt(brand);
 		int bodyInt = (Integer) Integer.parseInt(body);
@@ -388,28 +447,14 @@ public class DAOCarImpl implements DAOCar {
 		double priceDoub = (Double) Double.parseDouble(price);
 		double capacityDoub = (Double) Double.parseDouble(engineCapacity);
 		int seatsInt = (Integer) Integer.parseInt(numbOfSeats);
-		
+
 		try {
 			connection = ConnectionPool.getConnection();
-			PreparedStatement ps;
-			
-			if(photoName == null) {
-				
-				
-//				"UPDATE cars SET "
-//						+ "`brand` = ?,"
-//						+ "`body` = ?,"
-//						+ "`transmission` = ?,"
-//						+ "`class` = ?,"
-//						+ "`fuel` = ?,"
-//						+ "`price` = ?,"
-//						+ "`full_name` = ?,"
-//						+ "`engine_capacity` = ?,"
-//						+ "`numb_of_seats` = ?"
-//						+ "WHERE id = ?;";
-				
+
+			if (photoName == null) {
+
 				ps = connection.prepareStatement(DAO_CAR_EDIT_CAR_WITHOUT_PHOTO);
-				
+
 				ps.setInt(1, brandInt);
 				ps.setInt(2, bodyInt);
 				ps.setInt(3, transmissionInt);
@@ -420,20 +465,11 @@ public class DAOCarImpl implements DAOCar {
 				ps.setDouble(8, capacityDoub);
 				ps.setInt(9, seatsInt);
 				ps.setInt(10, idInt);
-				
-				System.out.println("without phone");
-				
 				row = ps.executeUpdate();
-				System.out.println("edit phone");
-			}else{
-				
-//				"UPDATE cars SET "
-//						+ "`brand` = ?,`body` = ?,`transmission` = ?,`class` = ?,`fuel` = ?,"
-//						+ "`price` = ?,`full_name` = ?,`engine_capacity` = ?,`numb_of_seats` = ?,`photo` = ?"
-//						+ "WHERE id = ?;";
-				
+			} else {
+
 				ps = connection.prepareStatement(DAO_CAR_EDIT_CAR_WITH_PHOTO);
-				
+
 				ps.setInt(1, brandInt);
 				ps.setInt(2, bodyInt);
 				ps.setInt(3, transmissionInt);
@@ -445,30 +481,33 @@ public class DAOCarImpl implements DAOCar {
 				ps.setInt(9, seatsInt);
 				ps.setString(10, photoName);
 				ps.setInt(11, idInt);
-				
-				System.out.println("with phone");
-
 				row = ps.executeUpdate();
-				System.out.println("edit phone");
-				
-			} 
-			
-			if(row > 0) {
+			}
+
+			if (row > 0) {
 				isEditCar = true;
 			}
-			
-		}catch (SQLException e) {
-				log.error(e);
-				throw new DAOException(e);
-			} finally {
+
+		} catch (SQLException e) {
+			log.error(e);
+			throw new DAOException(e);
+		} finally {
+			if (ps != null) {
 				try {
-					connection.close();
+					ps.close();
 				} catch (SQLException e) {
 					log.error(e);
 					throw new DAOException(e);
 				}
 			}
-		
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				log.error(e);
+				throw new DAOException(e);
+			}
+		}
+
 		return isEditCar;
 	}
 }

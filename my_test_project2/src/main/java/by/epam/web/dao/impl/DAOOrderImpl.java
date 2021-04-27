@@ -28,16 +28,11 @@ public class DAOOrderImpl implements DAOOrder {
 	}
 
 	private static final Logger log = Logger.getLogger(DAOOrder.class);
-
 	private WrapperConnection connection = null;
-
 	private static final String DAO_ORDER_ADD_NEW_ORDER = "INSERT INTO `garage`.`orders`"
 			+ " (`user_id`, `car_id`,`status`,start_date,end_date, total_cost) " + "VALUES ( ?, ?, '1',?,?,?);";
 
 	private static final String DAO_ORDER_CHECK_NEW_ORDER = "SELECT car_id FROM orders WHERE status IN(1,2) AND car_id = ?;";
-
-//	private static final String DAO_ORDER_GET_CURRENT_ORDERS = "SELECT * FROM orders WHERE user_id = ?;";
-
 	private static final String DAO_ORDER_GET_CURRENT_ORDERS = "SELECT orders.id, orders.user_id, orders.car_id, orders.status,"
 			+ "orders.start_date, orders.end_date, orders.total_cost, cars.full_name " + "FROM orders "
 			+ "LEFT JOIN  cars ON cars.id = orders.car_id " + "WHERE user_id = ? AND orders.status IN (1,2) "
@@ -60,7 +55,8 @@ public class DAOOrderImpl implements DAOOrder {
 	@Override
 	public boolean addOrder(int userId, int carId, List<String> date, double totalCost) throws DAOException {
 
-//		int userId, int carId, List<String> date, double totalCost;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date start;
@@ -74,24 +70,21 @@ public class DAOOrderImpl implements DAOOrder {
 		}
 
 		boolean isAddOrder = false;
-//		boolean isCheckOrder = false;
 		int i;
 
 		try {
 			connection = ConnectionPool.getConnection();
 
-			PreparedStatement ps = connection.prepareStatement(DAO_ORDER_CHECK_NEW_ORDER);
+			ps = connection.prepareStatement(DAO_ORDER_CHECK_NEW_ORDER);
 			ps.setInt(1, carId);
 
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				System.out.println("Rs not null");
 				return isAddOrder;
 			} else {
-
+				ps.close();
 				ps = connection.prepareStatement(DAO_ORDER_ADD_NEW_ORDER);
-
 				ps.setInt(1, userId);
 				ps.setInt(2, carId);
 				ps.setTimestamp(3, new Timestamp(start.getTime()));
@@ -103,6 +96,22 @@ public class DAOOrderImpl implements DAOOrder {
 			log.error(e);
 			throw new DAOException(e);
 		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
 			try {
 				connection.close();
 			} catch (SQLException e) {
@@ -121,16 +130,19 @@ public class DAOOrderImpl implements DAOOrder {
 	@Override
 	public Map<Order, String> getCurrentsOrder(int id) throws DAOException {
 
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+
 		Map<Order, String> orders = new LinkedHashMap<Order, String>();
 
 		try {
 			connection = ConnectionPool.getConnection();
 
-			PreparedStatement ps = connection.prepareStatement(DAO_ORDER_GET_CURRENT_ORDERS);
+			ps = connection.prepareStatement(DAO_ORDER_GET_CURRENT_ORDERS);
 
 			ps.setInt(1, id);
 
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 			while (rs.next()) {
 				Order order = new Order(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getTimestamp(5),
 						rs.getTimestamp(6), rs.getDouble(7));
@@ -142,6 +154,22 @@ public class DAOOrderImpl implements DAOOrder {
 			log.error(e);
 			throw new DAOException(e);
 		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
 			try {
 				connection.close();
 			} catch (SQLException e) {
@@ -154,13 +182,16 @@ public class DAOOrderImpl implements DAOOrder {
 	@Override
 	public Map<Order, String> getCurrentOrdersForAdmin() throws DAOException {
 
+		Statement st = null;
+		ResultSet rs = null;
+
 		Map<Order, String> orders = new LinkedHashMap<Order, String>();
 
 		try {
 			connection = ConnectionPool.getConnection();
 
-			Statement st = connection.createStatement();
-			ResultSet rs = st.executeQuery(DAO_ORDER_GET_CURRENT_ORDERS_FOR_ADMIN);
+			st = connection.createStatement();
+			rs = st.executeQuery(DAO_ORDER_GET_CURRENT_ORDERS_FOR_ADMIN);
 			while (rs.next()) {
 				Order order = new Order(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getTimestamp(5),
 						rs.getTimestamp(6), rs.getDouble(7));
@@ -172,6 +203,22 @@ public class DAOOrderImpl implements DAOOrder {
 			log.error(e);
 			throw new DAOException(e);
 		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
+			if (st != null) {
+				try {
+					st.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
 			try {
 				connection.close();
 			} catch (SQLException e) {
@@ -184,30 +231,46 @@ public class DAOOrderImpl implements DAOOrder {
 	@Override
 	public Map<Order, String> getAllUsersOrders(int id) throws DAOException {
 
-		System.out.println("getAllUsersOrders");
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 
 		Map<Order, String> orders = new LinkedHashMap<Order, String>();
 
 		try {
 			connection = ConnectionPool.getConnection();
 
-			PreparedStatement ps = connection.prepareStatement(DAO_ORDER_GET_ALL_USERS_ORDERS);
+			ps = connection.prepareStatement(DAO_ORDER_GET_ALL_USERS_ORDERS);
 
 			ps.setInt(1, id);
 
-			ResultSet rs = ps.executeQuery();
+			rs = ps.executeQuery();
 			while (rs.next()) {
 				Order order = new Order(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getTimestamp(5),
 						rs.getTimestamp(6), rs.getDouble(7));
 				String carName = rs.getString(8);
 				orders.put(order, carName);
 			}
-			System.out.println("DAO" + orders + "DAO");
 			return orders;
 		} catch (SQLException e) {
 			log.error(e);
 			throw new DAOException(e);
 		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
 			try {
 				connection.close();
 			} catch (SQLException e) {
@@ -220,13 +283,16 @@ public class DAOOrderImpl implements DAOOrder {
 	@Override
 	public Map<Order, String> getAllOrders() throws DAOException {
 
+		Statement st = null;
+		ResultSet rs = null;
+
 		Map<Order, String> orders = new LinkedHashMap<Order, String>();
 
 		try {
 			connection = ConnectionPool.getConnection();
 
-			Statement st = connection.createStatement();
-			ResultSet rs = st.executeQuery(DAO_ORDER_GET_ALL_ORDERS);
+			st = connection.createStatement();
+			rs = st.executeQuery(DAO_ORDER_GET_ALL_ORDERS);
 
 			while (rs.next()) {
 				Order order = new Order(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getTimestamp(5),
@@ -239,6 +305,22 @@ public class DAOOrderImpl implements DAOOrder {
 			log.error(e);
 			throw new DAOException(e);
 		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
+			if (st != null) {
+				try {
+					st.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
 			try {
 				connection.close();
 			} catch (SQLException e) {
@@ -251,11 +333,13 @@ public class DAOOrderImpl implements DAOOrder {
 	@Override
 	public boolean cancelOrderByUser(int id) throws DAOException {
 
+		PreparedStatement ps = null;
+
 		boolean isCancelOrder = false;
 		int i;
 		try {
 			connection = ConnectionPool.getConnection();
-			PreparedStatement ps = connection.prepareStatement(DAO_ORDER_CENCEL_ORDER_BY_USER);
+			ps = connection.prepareStatement(DAO_ORDER_CENCEL_ORDER_BY_USER);
 			ps.setInt(1, id);
 			i = ps.executeUpdate();
 
@@ -263,6 +347,14 @@ public class DAOOrderImpl implements DAOOrder {
 			log.error(e);
 			throw new DAOException(e);
 		} finally {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
 			try {
 				connection.close();
 			} catch (SQLException e) {
@@ -278,11 +370,13 @@ public class DAOOrderImpl implements DAOOrder {
 
 	public boolean cancelOrderByAdmin(int id) throws DAOException {
 
+		PreparedStatement ps = null;
+
 		boolean isCancelOrder = false;
 		int i;
 		try {
 			connection = ConnectionPool.getConnection();
-			PreparedStatement ps = connection.prepareStatement(DAO_ORDER_CENCEL_ORDER_BY_ADMIN);
+			ps = connection.prepareStatement(DAO_ORDER_CENCEL_ORDER_BY_ADMIN);
 			ps.setInt(1, id);
 			i = ps.executeUpdate();
 
@@ -290,6 +384,14 @@ public class DAOOrderImpl implements DAOOrder {
 			log.error(e);
 			throw new DAOException(e);
 		} finally {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
 			try {
 				connection.close();
 			} catch (SQLException e) {
@@ -305,11 +407,13 @@ public class DAOOrderImpl implements DAOOrder {
 
 	public boolean acceptOrder(int id) throws DAOException {
 
+		PreparedStatement ps = null;
+
 		boolean isAcceptOrder = false;
 		int i;
 		try {
 			connection = ConnectionPool.getConnection();
-			PreparedStatement ps = connection.prepareStatement(DAO_ORDER_ACCEPT_ORDER_BY_ADMIN);
+			ps = connection.prepareStatement(DAO_ORDER_ACCEPT_ORDER_BY_ADMIN);
 			ps.setInt(1, id);
 			i = ps.executeUpdate();
 
@@ -317,6 +421,14 @@ public class DAOOrderImpl implements DAOOrder {
 			log.error(e);
 			throw new DAOException(e);
 		} finally {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
 			try {
 				connection.close();
 			} catch (SQLException e) {
@@ -332,11 +444,14 @@ public class DAOOrderImpl implements DAOOrder {
 
 	@Override
 	public boolean completeOrder(int id) throws DAOException {
+
+		PreparedStatement ps = null;
+
 		boolean isCompleteOrder = false;
 		int i;
 		try {
 			connection = ConnectionPool.getConnection();
-			PreparedStatement ps = connection.prepareStatement(DAO_ORDER_COMPLETE_ORDER_BY_ADMIN);
+			ps = connection.prepareStatement(DAO_ORDER_COMPLETE_ORDER_BY_ADMIN);
 			ps.setInt(1, id);
 			i = ps.executeUpdate();
 
@@ -344,6 +459,14 @@ public class DAOOrderImpl implements DAOOrder {
 			log.error(e);
 			throw new DAOException(e);
 		} finally {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
 			try {
 				connection.close();
 			} catch (SQLException e) {
@@ -356,51 +479,4 @@ public class DAOOrderImpl implements DAOOrder {
 		}
 		return isCompleteOrder;
 	}
-
-//	public static Date formetter(Timestamp sqlDate) {
-//		SimpleDateFormat formatter =  new SimpleDateFormat("yyyy-MM-dd");
-//		String sqlD = formatter.format(sqlDate);
-//		Date date = null;
-//		try {
-//			date = formatter.parse(sqlD);
-//		} catch (ParseException e) {
-//			log.error(e);
-//		}
-
-//		return date;
-//	}
-
-//	@Override
-//	public List<Order> getCurrentOrder(int id) {
-//		
-//		List<Order> orders = new ArrayList<Order>();
-//		
-//		try {
-//			connection = ConnectionPool.getConnection();
-//			
-//			PreparedStatement ps = connection.prepareStatement(DAO_ORDER_GET_CURRENT_ORDERS);
-//			
-//			ps.setInt(1, id);
-//			
-//			ResultSet rs = ps.executeQuery();
-////			public Order(int id, int userId, int car, OrderStatus status, Date start, Date finish, double totalCost)
-//			while(rs.next()) {
-//				
-//				Order order = new Order(rs.getInt(1), rs.getInt(2),rs.getInt(3), rs.getInt(4),
-//						rs.getTimestamp(5),rs.getTimestamp(5), rs.getDouble(7));
-//				orders.add(order);
-//			}
-//		}catch (SQLException e) {
-//			log.error(e);
-//			throw new DAOException(e);
-//		}finally {
-//			try {
-//				connection.close();
-//			} catch (SQLException e) {
-//				log.error(e);
-//				throw new DAOException(e);
-//			}
-//		}
-//		return orders;
-//	}
 }
