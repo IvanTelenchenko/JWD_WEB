@@ -42,9 +42,11 @@ public class ServiceUserImpl implements ServiceUser {
 		}
 
 		if (user == null) {
+			log.info("The user is null");
 			throw new ObjectNullPointerException("The user is null");
 		}
-
+		
+		log.info("The user has been authorized");
 		return user;
 	}
 

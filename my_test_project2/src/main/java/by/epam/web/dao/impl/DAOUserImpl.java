@@ -34,13 +34,14 @@ public class DAOUserImpl implements DAOUser {
 
 	private WrapperConnection connection = null;
 
-
+	@SuppressWarnings("resource")
 	@Override
-	public boolean registration(String firstname, String lastname, String email, String password, String phoneNumber) throws DAOException {
-		
+	public boolean registration(String firstname, String lastname, String email, String password, String phoneNumber)
+			throws DAOException {
+
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		
+
 		try {
 			connection = ConnectionPool.getConnection();
 
@@ -54,12 +55,15 @@ public class DAOUserImpl implements DAOUser {
 				return false;
 			} else {
 				ps.close();
+				System.out.println("fdsfs");
 				ps = connection.prepareStatement(DAO_USER_INSERT_INTO_DB);
 				ps.setString(1, firstname);
 				ps.setString(2, lastname);
 				ps.setString(3, email);
 				ps.setString(4, password);
 				ps.setString(5, phoneNumber);
+
+				ps.executeUpdate();
 			}
 			return true;
 		} catch (SQLException e) {
@@ -93,16 +97,31 @@ public class DAOUserImpl implements DAOUser {
 
 	@Override
 	public User authorization(String email, String password) throws DAOException {
-		
+
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		
+
 		User user = null;
 
+		String passwordFromDB;
+
+		int userId = getUserId(email);
+		passwordFromDB = getPassword(userId);
+
+		if(!passwordFromDB.equals(password)) {
+			System.out.println(passwordFromDB);
+			System.out.println(password);
+			log.info("The passwords haven't been equal");
+			return user;
+		}
+		
 		try {
 			connection = ConnectionPool.getConnection();
 
 			ps = connection.prepareStatement(DAO_USER_SELECT_USER);
+
+			System.out.println(email);
+			System.out.println(password);
 
 			ps.setString(1, email);
 			ps.setString(2, password);
@@ -113,7 +132,58 @@ public class DAOUserImpl implements DAOUser {
 				user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
 						rs.getString(6), rs.getInt(7));
 			}
+
+			System.out.println(user);
+
 			return user;
+		} catch (SQLException e) {
+			log.error(e);
+			throw new DAOException(e);
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					log.error(e);
+					throw new DAOException(e);
+				}
+			}
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				throw new DAOException(e);
+			}
+		}
+	}
+
+	private int getUserId(String email) throws DAOException {
+
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int userId = 0;
+
+		try {
+			connection = ConnectionPool.getConnection();
+
+			ps = connection.prepareStatement(DAO_USER_FIND_EMAIL);
+
+			ps.setString(1, email);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				userId = rs.getInt(1);
+			}
+			return userId;
+
 		} catch (SQLException e) {
 			log.error(e);
 			throw new DAOException(e);
@@ -144,10 +214,10 @@ public class DAOUserImpl implements DAOUser {
 
 	@Override
 	public String getPassword(int id) throws DAOException {
-		
+
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		
+
 		String password = null;
 		try {
 
@@ -195,7 +265,7 @@ public class DAOUserImpl implements DAOUser {
 	@Override
 	public boolean changePassword(String newPassword, int id) throws DAOException {
 		PreparedStatement ps = null;
-		
+
 		try {
 			connection = ConnectionPool.getConnection();
 
@@ -234,10 +304,10 @@ public class DAOUserImpl implements DAOUser {
 
 	@Override
 	public boolean checkEmail(String email, int id) throws DAOException {
-		
+
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		
+
 		try {
 			connection = ConnectionPool.getConnection();
 
@@ -284,9 +354,9 @@ public class DAOUserImpl implements DAOUser {
 
 	@Override
 	public boolean updatePD(String firstname, String lastname, String email, String phone, int id) throws DAOException {
-		
+
 		PreparedStatement ps = null;
-		
+
 		try {
 			connection = ConnectionPool.getConnection();
 
@@ -299,10 +369,10 @@ public class DAOUserImpl implements DAOUser {
 			ps.setInt(5, id);
 
 			int i = ps.executeUpdate();
-			
+
 			if (i > 0) {
 				return true;
-			}else {
+			} else {
 				return false;
 			}
 
@@ -329,7 +399,7 @@ public class DAOUserImpl implements DAOUser {
 
 	@Override
 	public User getUser(int id) throws DAOException {
-		
+
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		User user = null;
@@ -342,7 +412,7 @@ public class DAOUserImpl implements DAOUser {
 			ps.setInt(1, id);
 
 			rs = ps.executeQuery();
-			
+
 			if (rs.next()) {
 				user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
 						rs.getString(6), rs.getInt(7));
