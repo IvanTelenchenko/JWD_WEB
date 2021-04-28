@@ -2,11 +2,11 @@ package by.epam.web.service.exception;
 
 import by.epam.web.service.ServiceException;
 
+/**
+ * This class represents an exception in the Service classes. 
+ * */
 public class ObjectNullPointerException extends ServiceException {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	public ObjectNullPointerException() {

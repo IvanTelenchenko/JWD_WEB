@@ -48,9 +48,9 @@ public final class ServiceCarImpl implements ServiceCar {
 		cars = daoCar.getCarsWithFilter(map, date);
 		return cars;
 	}
-	
+
 	@Override
-	public List<Car> getCarsWithoutFilter(List<String> date) throws ServiceException   {
+	public List<Car> getCarsWithoutFilter(List<String> date) throws ServiceException {
 
 		DAOProvider provider = DAOProvider.getInstance();
 		DAOCar daoCar = provider.getCar();
@@ -128,42 +128,37 @@ public final class ServiceCarImpl implements ServiceCar {
 		boolean isAddCar = false;
 
 		Validator validator = new Validator();
-		
+
 		StringBuilder messageError = new StringBuilder();
-		
+
 		if (!validator.valiadateMaxLength255(name)) {
 			log.error("The string length is more than 255 characters");
-//			throw new NotValidDataException("The string length is more than 255 characters");
 			messageError.append("&errorLengthName=error");
 		}
 		if (!validator.valiadateDouble(price)) {
 			log.error("The value doesn't match the double value");
-//			throw new NotValidDataException("The value doesn't match the double value");
 			messageError.append("&errorDoublePrice=error");
 		}
 		if (!validator.valiadateDouble(engineCapacity)) {
 			log.error("The value doesn't match the double value");
-//			throw new NotValidDataException("The value doesn't match the double value");
 			messageError.append("&errorDoubleCapacity=error");
 		}
-		
+
 		if (!validator.valiadateInteger(numbOfSeats)) {
 			log.error("The value doesn't match the integer value");
-//			throw new NotValidDataException("The value doesn't match the integer value");
 			messageError.append("&errorIntegerSeats=error");
 		}
-		
+
 		System.out.println("name " + uniqueNamePhoto);
-		
-		if(!validator.valiadateImage(uniqueNamePhoto) && uniqueNamePhoto != null) {
+
+		if (!validator.valiadateImage(uniqueNamePhoto) && uniqueNamePhoto != null) {
 			log.error("This file is not an image");
 			messageError.append("&errorImageNull=error");
 		}
-		
-		if(messageError.toString().length() > 0) {
+
+		if (messageError.toString().length() > 0) {
 			throw new NotValidDataException(messageError.toString());
 		}
-		
 
 		try {
 			isAddCar = daoCar.addNewCar(brand, body, transmission, classAuto, fuel, price, name, engineCapacity,
@@ -190,57 +185,38 @@ public final class ServiceCarImpl implements ServiceCar {
 
 		boolean isEditCar = false;
 
-//		Validator validator = new Validator();
-//
-//		if (!validator.valiadateMaxLength255(name)) {
-//			log.error("The string length is more than 255 characters");
-//			throw new NotValidDataException("The string length is more than 255 characters");
-//		}
-//		if (!validator.valiadateDouble(price)) {
-//			log.error("The value doesn't match the double value");
-//			throw new NotValidDataException("The value doesn't match the double value");
-//		}
-//		if (!validator.valiadateInteger(numbOfSeats)) {
-//			log.error("The value doesn't match the integer value");
-//			throw new NotValidDataException("The value doesn't match the integer value");
-//		}
-		
-Validator validator = new Validator();
-		
+		Validator validator = new Validator();
+
 		StringBuilder messageError = new StringBuilder();
-		
+
 		if (!validator.valiadateMaxLength255(name)) {
 			log.error("The string length is more than 255 characters");
-//			throw new NotValidDataException("The string length is more than 255 characters");
 			messageError.append("&errorLengthName=error");
 		}
 		if (!validator.valiadateDouble(price)) {
 			log.error("The value doesn't match the double value");
-//			throw new NotValidDataException("The value doesn't match the double value");
 			messageError.append("&errorDoublePrice=error");
 		}
 		if (!validator.valiadateDouble(engineCapacity)) {
 			log.error("The value doesn't match the double value");
-//			throw new NotValidDataException("The value doesn't match the double value");
 			messageError.append("&errorDoubleCapacity=error");
 		}
-		
+
 		if (!validator.valiadateInteger(numbOfSeats)) {
 			log.error("The value doesn't match the integer value");
-//			throw new NotValidDataException("The value doesn't match the integer value");
 			messageError.append("&errorIntegerSeats=error");
 		}
-		
+
 		System.out.println("name " + photoName);
-		
-		if(photoName != null) {
-			if(!validator.valiadateImage(photoName)) {
+
+		if (photoName != null) {
+			if (!validator.valiadateImage(photoName)) {
 				log.error("This file is not an image");
 				messageError.append("&errorImageNull=error");
 			}
 		}
-		
-		if(messageError.toString().length() > 0) {
+
+		if (messageError.toString().length() > 0) {
 			throw new NotValidDataException(messageError.toString());
 		}
 

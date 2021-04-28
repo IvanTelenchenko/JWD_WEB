@@ -4,9 +4,6 @@ import java.util.HashMap;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.log4j.Logger;
 
 import by.epam.web.controller.command.impl.AcceptOrder;
@@ -42,15 +39,16 @@ import by.epam.web.controller.command.impl.MainPageWithFilter;
 import by.epam.web.controller.command.impl.Registration;
 
 /**
- * This class represents factory of commands. Based on the factory method pattern
- * */
+ * This class represents factory of commands. Based on the factory method
+ * pattern
+ */
 
 public class FactoryCommand {
-	
+
 	private static final Logger log = Logger.getLogger(FactoryCommand.class);
-	
-	private Map<CommandName,Command> commands = new HashMap<>();
-	
+
+	private Map<CommandName, Command> commands = new HashMap<>();
+
 	public FactoryCommand() {
 		commands.put(CommandName.AUTHORIZATION, new Authorization());
 		commands.put(CommandName.GOTOSIGNIN, new GoToSignInPage());
@@ -84,9 +82,10 @@ public class FactoryCommand {
 		commands.put(CommandName.ERROR404, new GoToError404());
 		commands.put(CommandName.ERROR500, new GoToError500());
 	}
-	
+
 	/**
 	 * This method returns {@link Command}
+	 * 
 	 * @param name Command name
 	 * @return returns {@link Command} which match with command name
 	 * 
@@ -95,10 +94,10 @@ public class FactoryCommand {
 	public Command getCommand(String name) {
 
 		CommandName command = CommandName.valueOf(name.toUpperCase());
-		
-		log.info("The command " + name +" has been gotten");
-		
-		return commands.get(command);		
+
+		log.info("The command " + name + " has been gotten");
+
+		return commands.get(command);
 	}
 
 }

@@ -35,10 +35,6 @@ public class ServiceOrderImpl implements ServiceOrder {
 			throw new ServiceException("The order hasn't been created");
 		}
 
-//		if (!isAddOrder) {
-//			throw new ServiceException("The order hasn't been created");
-//		}
-
 		return isAddOrder;
 	}
 
@@ -136,10 +132,6 @@ public class ServiceOrderImpl implements ServiceOrder {
 			throw new ServiceException("The order wasn't canceled");
 		}
 
-//		if (!isCancelOrder) {
-//			throw new ServiceException("The order hasn't been canceled");
-//		}
-
 		return isCancelOrder;
 	}
 
@@ -170,9 +162,6 @@ public class ServiceOrderImpl implements ServiceOrder {
 			log.error(e);
 			throw new ServiceException("The order wasn't accepted");
 		}
-
-//		if (!isAcceptOrder) {
-//		}
 
 		return isAcceptOrder;
 	}
@@ -231,9 +220,6 @@ public class ServiceOrderImpl implements ServiceOrder {
 			log.error(e);
 			throw new ServiceException("The order wasn't completed");
 		}
-
-//		if (!isCompleteOrder) {
-//		}
 
 		return isCompleteOrder;
 	}

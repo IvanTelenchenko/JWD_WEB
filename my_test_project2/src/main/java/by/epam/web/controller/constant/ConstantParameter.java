@@ -33,9 +33,6 @@ public class ConstantParameter {
 	public static final String ENGINECAPACITY = "enginecapacity";
 	public static final String FILTERCARS = "filterCars";
 	public static final String FIRSTNAME = "firstname";
-	
-//	public static final String GOTOCARSBASE = "gotocarsbase";
-	
 	public static final String LASTNAME = "lastname";
 	public static final String LOCAL = "local";
 	public static final String LOCALE = "locale";
@@ -56,6 +53,4 @@ public class ConstantParameter {
 	public static final String TOTALCOST = "totalCost";
 	public static final String USER = "user";
 	public static final String USERID = "userId";
-    
-
 }

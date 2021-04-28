@@ -11,13 +11,14 @@ import org.apache.log4j.Logger;
 import by.epam.web.entity.TypeOfBrand;
 import by.epam.web.entity.User;
 
+/**
+ * This class represents a custom tag for the jsp page
+ * */
+
 public class CarBrandTag extends TagSupport {
 
 	private static final Logger log = Logger.getLogger(CarBrandTag.class);
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3185326621064778240L;
 
 	private TypeOfBrand brand;

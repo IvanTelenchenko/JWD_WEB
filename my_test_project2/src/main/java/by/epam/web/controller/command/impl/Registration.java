@@ -49,7 +49,6 @@ public class Registration implements Command{
 			serviceReg.registration(firstname, lastname, email, password, phoneNumber);
 		} catch (NotValidDataException e) {
 			log.error(e);
-//			response.sendRedirect(ConstantPage.GOTOREGISTRATION + ERROR_MESSAGE_NOT_VALID);
 			response.sendRedirect(ConstantPage.GOTOREGISTRATION + ERROR_MESSAGE_NOT_VALID + e.getMessage());
 			return;
 		}catch (ImpossibleExecuteException e) {

@@ -30,7 +30,6 @@ public final class ConnectionPool {
 	private ConnectionPool() {
 	}
 	
-	
 	/**
 	 * This method initialize {@link Connection} in the connection pool
 	 * */
@@ -43,9 +42,7 @@ public final class ConnectionPool {
 
 		for (int i = 0; i < size; i++) {
 			Connection con = openConnection();
-//			System.out.println("hello");
 			sourcePool.add(con);
-//			System.out.println("wrapper");
 			pool.add(new WrapperConnection(con,pool));
 			log.info(" The connection number " + i + " has been added to connection pool");
 		}
@@ -64,14 +61,11 @@ public final class ConnectionPool {
 			}
 	}
 
-	
 	/**
 	 * This method allows you to create the new {@link Connection} with help {@link DriverManager}
 	 * */
 	private static Connection openConnection() throws ConnectionPoolException{
 			try {
-//				System.out.println(PropertiesUtil.get(DBParametr.DB_URL_KEY) +" "+
-//						PropertiesUtil.get(DBParametr.DB_USERNAME_KEY)+" "+ PropertiesUtil.get(DBParametr.DB_PASSWORD_KEY));
 				return DriverManager.getConnection(PropertiesUtil.get(DBParametr.DB_URL_KEY),
 						PropertiesUtil.get(DBParametr.DB_USERNAME_KEY), PropertiesUtil.get(DBParametr.DB_PASSWORD_KEY));
 			} catch (SQLException e) {
@@ -79,7 +73,6 @@ public final class ConnectionPool {
 				throw new ConnectionPoolException("The connection hasn't been created");
 			}
 	}
-	
 	
 	/**
 	 * This method allows you to close the {@link ConnectionPool}
