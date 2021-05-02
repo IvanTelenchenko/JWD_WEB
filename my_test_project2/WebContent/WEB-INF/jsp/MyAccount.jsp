@@ -86,30 +86,8 @@
 					</td>
 				</tr>
 				</c:if>
-				
-				<%-- <tr>
-				<td>
-					<c:if test="${order.key.status == 'CREATED'}">
-						<form class="acceptlOrder" action="Controller" method="post">
-							<input type="hidden" name="command" value="acceptorder">
-							<input type="hidden" name="orderidaccept" value="${order.key.id}">
-							<input class="butAcceptOrder" type="submit" value="${accept}"/>
-						</form>
-					</c:if>
-				</td>	 
-				<c:if test="${order.key.status == 'CREATED' || order.key.status == 'BOOKED'}">
-					<td>
-					<form class="cancelOrder" action="Controller" method="post">
-						<input type="hidden" name="command" value="cancelorder">
-						<input type="hidden" name="orderidcancel" value="${order.key.id}">
-						<input class="butCancelOrder" type="submit" value="${buttonCancelOrder}" />
-					</form>
-					</td>
-				</c:if>	
-				</tr> --%>
 			</table>	
 			</c:forEach>
-	<!-- 	</table> -->
 		</c:if>
 	</article>
 </div>
@@ -145,10 +123,6 @@
 					<td>${ordernumb}</td> 
 					<td>${order.key.id}</td> 
 				</tr>	
-				<%-- <tr>
-					<td>${userid }</td> 
-					<td>${order.key.userId}</td> 
-				</tr> --%>	
 				<tr>
 					<td>${cartitle}</td> 
 					<td>${order.value}</td> 
@@ -175,7 +149,6 @@
 				</tr>
 			</table>	
 			</c:forEach>
-	<!-- 	</table> -->
 		</c:if>
 	</article>
 </div>

@@ -27,10 +27,7 @@
   
 	<context-param>
     <param-name>image.directory</param-name>
-   <!--  <param-value>c:\Users\vanes\git\JWD_WEB\my_test_project\WebContent\img\</param-value> -->
     <param-value>D:\java\My-Final-Project\my_test_project2\WebContent\img\</param-value>
-    
-    
   </context-param>
   
 	<jsp-config>
@@ -44,5 +41,9 @@
 		</taglib>
 		
 	</jsp-config>
+	
+	<session-config>
+		<session-timeout>10</session-timeout>
+	</session-config>
 	
   </web-app>

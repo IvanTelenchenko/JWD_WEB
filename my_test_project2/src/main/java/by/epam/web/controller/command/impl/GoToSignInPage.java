@@ -31,8 +31,6 @@ public class GoToSignInPage implements Command {
 
 		Boolean isSession = (Boolean) session.getAttribute(ConstantParameter.AUTH);
 		
-		System.out.println(isSession);
-		
 		if (isSession != null) {
 			response.sendRedirect(ConstantPage.GOTOMAINPAGE);
 			log.info("The session is null");

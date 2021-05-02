@@ -27,7 +27,7 @@ public class UserValidatorPhoneTest {
 	}
 	//"^(\\+[0-9]{9,15}|[0-9]{9,15})$";
 	@Parameterized.Parameters
-	 public static Collection primeNumbers() {
+	 public static Collection<Object[]> primeNumbers() {
 	      return Arrays.asList(new Object[][] {
 	         {"375291111111", true },
 	         {"1111111", false },

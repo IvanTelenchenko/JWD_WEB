@@ -34,7 +34,6 @@ public class GoToChangePDPage implements Command{
 		HttpSession session = request.getSession();
 		
 		Boolean isAuth = (Boolean)session.getAttribute(ConstantParameter.AUTH);
-		System.out.println(isAuth);
 		
 		if(isAuth == null || !isAuth) {
 			response.sendRedirect(ConstantPage.GOTOMAINPAGE);

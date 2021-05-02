@@ -28,7 +28,7 @@ public class UserValidatorPasswordTest {
 
 	//"(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,20}";
 	@Parameterized.Parameters
-	 public static Collection primeNumbers() {
+	 public static Collection<Object[]> primeNumbers() {
 	      return Arrays.asList(new Object[][] {
 	         {"Password1", true },
 	         {"password1", false },

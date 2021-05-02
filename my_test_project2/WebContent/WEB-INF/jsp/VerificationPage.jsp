@@ -46,7 +46,7 @@
 					<input class="button" type="submit" name="button" value="${book}" />
 				</form>
 		</div>
-<p><a href="Controller?command=gotocar&id_car=${car.id}">${back}</a></p>
+<p><a href="Controller?command=gotocar&carid=${car.id}">${back}</a></p>
 	</article>
 </div>
 	<%@include file="footer.jsp"%>

@@ -32,7 +32,8 @@ public class DAOOrderImpl implements DAOOrder {
 	private static final String DAO_ORDER_ADD_NEW_ORDER = "INSERT INTO `garage`.`orders`"
 			+ " (`user_id`, `car_id`,`status`,start_date,end_date, total_cost) " + "VALUES ( ?, ?, '1',?,?,?);";
 
-	private static final String DAO_ORDER_CHECK_NEW_ORDER = "SELECT car_id FROM orders WHERE status IN(1,2) AND car_id = ?;";
+	private static final String DAO_ORDER_CHECK_NEW_ORDER = "SELECT car_id FROM orders WHERE status IN(1,2) AND car_id = ? AND"
+			+ " orders.end_date >= ? AND orders.start_date <= ?;";
 	private static final String DAO_ORDER_GET_CURRENT_ORDERS = "SELECT orders.id, orders.user_id, orders.car_id, orders.status,"
 			+ "orders.start_date, orders.end_date, orders.total_cost, cars.full_name " + "FROM orders "
 			+ "LEFT JOIN  cars ON cars.id = orders.car_id " + "WHERE user_id = ? AND orders.status IN (1,2) "
@@ -68,7 +69,7 @@ public class DAOOrderImpl implements DAOOrder {
 			log.error(e1);
 			throw new DAOException(e1);
 		}
-
+		
 		boolean isAddOrder = false;
 		int i;
 
@@ -77,6 +78,8 @@ public class DAOOrderImpl implements DAOOrder {
 
 			ps = connection.prepareStatement(DAO_ORDER_CHECK_NEW_ORDER);
 			ps.setInt(1, carId);
+			ps.setTimestamp(2, new Timestamp(start.getTime()));
+			ps.setTimestamp(3, new Timestamp(end.getTime()));
 
 			rs = ps.executeQuery();
 

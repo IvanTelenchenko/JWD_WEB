@@ -26,7 +26,7 @@ public class UserValidatorNameTest {
 	}
 
 	@Parameterized.Parameters
-	 public static Collection primeNumbers() {
+	 public static Collection<Object[]> primeNumbers() {
 	      return Arrays.asList(new Object[][] {
 	         {"Ivan", true },
 	         {"ivan", false },

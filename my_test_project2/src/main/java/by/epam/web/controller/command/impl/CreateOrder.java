@@ -61,7 +61,7 @@ public class CreateOrder implements Command {
 		if(session.getAttribute(ConstantParameter.DATEUSER) == null) {
 			date = (List<String>) session.getAttribute(ConstantParameter.DATEDEF);
 		}else {
-			date = (List<String>) session.getAttribute(ConstantParameter.DATEDEF);
+			date = (List<String>) session.getAttribute(ConstantParameter.DATEUSER);
 		}
 		
 		try {

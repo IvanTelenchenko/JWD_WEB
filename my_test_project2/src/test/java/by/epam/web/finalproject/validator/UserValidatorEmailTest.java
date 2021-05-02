@@ -29,7 +29,7 @@ public class UserValidatorEmailTest {
 	
 //	"^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$"
 	@Parameterized.Parameters
-	 public static Collection primeNumbers() {
+	 public static Collection<Object[]> primeNumbers() {
 	      return Arrays.asList(new Object[][] {
 	         {"ivan@email.com", true },
 	         {"ivan@email", false },

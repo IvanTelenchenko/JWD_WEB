@@ -29,7 +29,6 @@ public class ChangeLocale implements Command{
 		session.setAttribute(ConstantParameter.LOCALE, request.getParameter(ConstantParameter.LOCAL));
 		
 		response.sendRedirect(request.getHeader(ConstantParameter.REFERER));
-		System.out.println(request.getHeader(ConstantParameter.REFERER));
 		log.info("The locale has been changed " + request.getParameter(ConstantParameter.LOCAL));
 	}
 }

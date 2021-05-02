@@ -34,7 +34,6 @@ public class DAOUserImpl implements DAOUser {
 
 	private WrapperConnection connection = null;
 
-	@SuppressWarnings("resource")
 	@Override
 	public boolean registration(String firstname, String lastname, String email, String password, String phoneNumber)
 			throws DAOException {
@@ -55,7 +54,6 @@ public class DAOUserImpl implements DAOUser {
 				return false;
 			} else {
 				ps.close();
-				System.out.println("fdsfs");
 				ps = connection.prepareStatement(DAO_USER_INSERT_INTO_DB);
 				ps.setString(1, firstname);
 				ps.setString(2, lastname);
@@ -107,10 +105,13 @@ public class DAOUserImpl implements DAOUser {
 
 		int userId = getUserId(email);
 		passwordFromDB = getPassword(userId);
-
+		
+		if(passwordFromDB == null) {
+			log.info("The password is null");
+			return user;
+		}
+		
 		if(!passwordFromDB.equals(password)) {
-			System.out.println(passwordFromDB);
-			System.out.println(password);
 			log.info("The passwords haven't been equal");
 			return user;
 		}
@@ -119,9 +120,6 @@ public class DAOUserImpl implements DAOUser {
 			connection = ConnectionPool.getConnection();
 
 			ps = connection.prepareStatement(DAO_USER_SELECT_USER);
-
-			System.out.println(email);
-			System.out.println(password);
 
 			ps.setString(1, email);
 			ps.setString(2, password);
@@ -132,8 +130,6 @@ public class DAOUserImpl implements DAOUser {
 				user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
 						rs.getString(6), rs.getInt(7));
 			}
-
-			System.out.println(user);
 
 			return user;
 		} catch (SQLException e) {

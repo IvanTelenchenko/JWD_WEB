@@ -15,6 +15,7 @@ import by.epam.web.service.ServiceCar;
 import by.epam.web.service.ServiceException;
 import by.epam.web.service.exception.ImpossibleExecuteException;
 import by.epam.web.service.exception.NotValidDataException;
+import by.epam.web.util.XssSecurity;
 import by.epam.web.validator.Validator;
 
 public final class ServiceCarImpl implements ServiceCar {
@@ -149,8 +150,6 @@ public final class ServiceCarImpl implements ServiceCar {
 			messageError.append("&errorIntegerSeats=error");
 		}
 
-		System.out.println("name " + uniqueNamePhoto);
-
 		if (!validator.valiadateImage(uniqueNamePhoto) && uniqueNamePhoto != null) {
 			log.error("This file is not an image");
 			messageError.append("&errorImageNull=error");
@@ -161,7 +160,7 @@ public final class ServiceCarImpl implements ServiceCar {
 		}
 
 		try {
-			isAddCar = daoCar.addNewCar(brand, body, transmission, classAuto, fuel, price, name, engineCapacity,
+			isAddCar = daoCar.addNewCar(brand, body, transmission, classAuto, fuel, price, XssSecurity.xssSecurity(name), engineCapacity,
 					numbOfSeats, uniqueNamePhoto);
 		} catch (DAOException e) {
 			log.error(e);
@@ -207,8 +206,6 @@ public final class ServiceCarImpl implements ServiceCar {
 			messageError.append("&errorIntegerSeats=error");
 		}
 
-		System.out.println("name " + photoName);
-
 		if (photoName != null) {
 			if (!validator.valiadateImage(photoName)) {
 				log.error("This file is not an image");
@@ -221,7 +218,7 @@ public final class ServiceCarImpl implements ServiceCar {
 		}
 
 		try {
-			isEditCar = daoCar.editCar(id, brand, body, transmission, classAuto, fuel, price, name, engineCapacity,
+			isEditCar = daoCar.editCar(id, brand, body, transmission, classAuto, fuel, price, XssSecurity.xssSecurity(name), engineCapacity,
 					numbOfSeats, photoName);
 		} catch (DAOException e) {
 			log.error(e);
@@ -247,7 +244,6 @@ public final class ServiceCarImpl implements ServiceCar {
 					value.add(str);
 				}
 				map.put(entry.getKey(), value);
-				System.out.println(value.toString());
 			}
 		}
 		return map;

@@ -63,7 +63,9 @@ public final class DAOCarImpl implements DAOCar {
 
 		try {
 			connection = ConnectionPool.getConnection();
-
+			
+			// Converting a date value from a string to a class date
+			
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 			Date startDate = null;
 			Date endDate = null;
@@ -177,9 +179,13 @@ public final class DAOCarImpl implements DAOCar {
 
 		Statement st = null;
 		ResultSet rs = null;
-
+		
 		List<Car> list = new ArrayList<Car>();
-
+		
+		// Creating a part of a custom request for database with filter parameters
+		// The map consists of keys - categories to search for(class, brand)
+		// and values - a list of points for each category
+		
 		StringBuilder value = new StringBuilder();
 
 		for (Entry<String, List<String>> entry : map.entrySet()) {
@@ -191,7 +197,9 @@ public final class DAOCarImpl implements DAOCar {
 			value.append(") AND ");
 		}
 		value.delete(value.length() - 4, value.length());
-
+		
+		// Converting a date value from a string to a class date
+		
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date startDate = null;
 		Date endDate = null;
@@ -203,20 +211,24 @@ public final class DAOCarImpl implements DAOCar {
 			log.error(e);
 			throw new DAOException(e);
 		}
-
+		
+		// Creating a part of a custom request with dates as string dates
+		
 		String start = new Timestamp(startDate.getTime()).toString();
 		String end = new Timestamp(endDate.getTime()).toString();
-
-		String newVal = value.toString();
-		newVal += "AND cars.id NOT IN (SELECT orders.car_id FROM orders " + " WHERE orders.end_date > '" + start
-				+ "' AND orders.start_date < '" + end + "' )";
+		
+		// Creating custom request from parts
+		
+		String customRequest = value.toString();
+		customRequest += "AND cars.id NOT IN (SELECT orders.car_id FROM orders " + " WHERE orders.end_date >= '" + start
+				+ "' AND orders.start_date <= '" + end + "' )";
 		try {
 
 			connection = ConnectionPool.getConnection();
 
 			st = connection.createStatement();
 
-			rs = st.executeQuery(DAO_CAR_SELECT_CAR_WITH_FILTER + newVal);
+			rs = st.executeQuery(DAO_CAR_SELECT_CAR_WITH_FILTER + customRequest);
 
 			while (rs.next()) {
 				Car car = new Car(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getInt(5), rs.getInt(6),
@@ -357,11 +369,13 @@ public final class DAOCarImpl implements DAOCar {
 
 		boolean isAddCar = false;
 		int row;
-
+		
+		// Double value conversion
 		if (price.indexOf(',') != -1) {
 			price = price.replace(',', '.');
 		}
-
+		
+		// Double value conversion
 		if (engineCapacity.indexOf(',') != -1) {
 			engineCapacity = engineCapacity.replace(',', '.');
 		}
@@ -429,11 +443,13 @@ public final class DAOCarImpl implements DAOCar {
 
 		boolean isEditCar = false;
 		int row;
-
+		
+		// Double value conversion
 		if (price.indexOf(',') != -1) {
 			price = price.replace(',', '.');
 		}
-
+		
+		// Double value conversion
 		if (engineCapacity.indexOf(',') != -1) {
 			engineCapacity = engineCapacity.replace(',', '.');
 		}
